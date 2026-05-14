@@ -1,0 +1,2658 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>АвтоМаляр PRO — Руководство по покраске</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg2: #161616;
+      --bg3: #1e1e1e;
+      --bg4: #252525;
+      --border: rgba(255, 255, 255, 0.07);
+      --border2: rgba(255, 255, 255, 0.13);
+      --text: #e8e4dc;
+      --muted: #888;
+      --accent: #e8593c;
+      --accent2: #f0a830;
+      --accent3: #3b8bd4;
+      --green: #1d9e75;
+      --radius: 12px;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Nunito', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 15px;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* LAYOUT */
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 260px;
+      flex-shrink: 0;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 100;
+      overflow-y: auto;
+    }
+
+    .sidebar-logo {
+      padding: 1.5rem 1.25rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-logo .logo-text {
+      font-family: var(--font-display);
+      font-size: 28px;
+      letter-spacing: 2px;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .sidebar-logo .logo-sub {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .sidebar-nav {
+      padding: 1rem 0;
+      flex: 1;
+    }
+
+    .nav-section {
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: .5rem 1.25rem .25rem;
+      font-weight: 700;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: .55rem 1.25rem;
+      cursor: pointer;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--muted);
+      transition: all .2s;
+      border-left: 3px solid transparent;
+      user-select: none;
+    }
+
+    .nav-item:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .nav-item.active {
+      color: var(--text);
+      border-left-color: var(--accent);
+      background: rgba(232, 89, 60, 0.08);
+    }
+
+    .nav-item .step-badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .nav-item.done .step-badge {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .nav-item.active .step-badge {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .nav-item:not(.done):not(.active) .step-badge {
+      background: var(--bg4);
+      color: var(--muted);
+    }
+
+    .sidebar-bottom {
+      padding: 1rem 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .progress-wrap {
+      margin-bottom: .5rem;
+    }
+
+    .progress-label {
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      height: 4px;
+      background: var(--bg4);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+      transition: width .4s ease;
+    }
+
+    /* MAIN */
+    .main {
+      margin-left: 260px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TOPBAR */
+    .topbar {
+      position: sticky;
+      top: 0;
+      background: rgba(15, 15, 15, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: .75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 50;
+    }
+
+    .topbar-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      letter-spacing: 2px;
+      color: var(--text);
+    }
+
+    .topbar-nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      padding: .45rem 1.1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border2);
+      background: transparent;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .btn:hover {
+      background: var(--bg3);
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .btn.primary:hover {
+      background: #d04a2d;
+    }
+
+    .btn:disabled {
+      opacity: .35;
+      cursor: default;
+    }
+
+    /* CONTENT */
+    .content {
+      padding: 2.5rem 2rem;
+      max-width: 900px;
+      flex: 1;
+    }
+
+    /* SECTION */
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+      animation: fadeIn .3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      margin-bottom: 2rem;
+    }
+
+    .page-header .tag {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: .75rem;
+    }
+
+    .page-header h1 {
+      font-family: var(--font-display);
+      font-size: 48px;
+      letter-spacing: 3px;
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+
+    .page-header p {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 560px;
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 800;
+      margin-bottom: .75rem;
+    }
+
+    .card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+
+    /* LAYER STACK */
+    .layer-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .layer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: .7rem 1rem;
+      border-radius: 8px;
+      cursor: default;
+      transition: transform .15s;
+      border: 1px solid transparent;
+    }
+
+    .layer:hover {
+      transform: translateX(4px);
+    }
+
+    .layer .l-num {
+      font-family: var(--font-display);
+      font-size: 18px;
+      opacity: .5;
+      width: 20px;
+      text-align: center;
+    }
+
+    .layer .l-info {
+      flex: 1;
+    }
+
+    .layer .l-name {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .layer .l-sub {
+      font-size: 12px;
+      opacity: .7;
+      margin-top: 1px;
+    }
+
+    .layer .l-thick {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      opacity: .8;
+    }
+
+    .layer .l-grit {
+      font-size: 11px;
+      opacity: .6;
+    }
+
+    /* STEP DETAIL */
+    .step-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    @media(max-width:700px) {
+      .step-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .info-box {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+    }
+
+    .info-box .ib-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-weight: 800;
+      color: var(--muted);
+      margin-bottom: .5rem;
+    }
+
+    .info-box ul {
+      list-style: none;
+    }
+
+    .info-box ul li {
+      font-size: 14px;
+      padding: 3px 0;
+      padding-left: 16px;
+      position: relative;
+      color: var(--text);
+    }
+
+    .info-box ul li::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ALERT BOXES */
+    .alert {
+      border-radius: 8px;
+      padding: .75rem 1rem;
+      font-size: 13.5px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: .75rem;
+    }
+
+    .alert-icon {
+      flex-shrink: 0;
+      font-size: 16px;
+      margin-top: 1px;
+    }
+
+    .alert.tip {
+      background: rgba(59, 139, 212, .12);
+      border: 1px solid rgba(59, 139, 212, .25);
+      color: #92c4ef;
+    }
+
+    .alert.warn {
+      background: rgba(240, 168, 48, .1);
+      border: 1px solid rgba(240, 168, 48, .25);
+      color: #f0c870;
+    }
+
+    .alert.danger {
+      background: rgba(232, 89, 60, .1);
+      border: 1px solid rgba(232, 89, 60, .25);
+      color: #f09080;
+    }
+
+    .alert.success {
+      background: rgba(29, 158, 117, .1);
+      border: 1px solid rgba(29, 158, 117, .25);
+      color: #70d4b0;
+    }
+
+    /* PRODUCTS TABLE */
+    .prod-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+
+    .prod-table th {
+      text-align: left;
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      padding: .5rem .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .prod-table td {
+      padding: .65rem .75rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .prod-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .prod-table tr:hover td {
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .prod-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .prod-table .price {
+      font-weight: 700;
+      color: var(--accent2);
+      white-space: nowrap;
+    }
+
+    .prod-table .brand {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .prod-table .product-name {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    /* TABS */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0;
+    }
+
+    .tab-btn {
+      padding: .5rem 1rem;
+      border: none;
+      background: none;
+      color: var(--muted);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: all .15s;
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn .2s;
+    }
+
+    /* GRID CARDS */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .75rem;
+    }
+
+    @media(max-width:600px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mini-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .9rem 1rem;
+    }
+
+    .mini-card .mc-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-weight: 800;
+      color: var(--muted);
+      margin-bottom: .35rem;
+    }
+
+    .mini-card .mc-val {
+      font-size: 20px;
+      font-family: var(--font-display);
+      letter-spacing: 1px;
+      color: var(--text);
+    }
+
+    .mini-card .mc-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    /* CHECKLIST */
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      padding: .45rem .75rem;
+      border-radius: 8px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all .15s;
+      user-select: none;
+    }
+
+    .checklist li:hover {
+      border-color: var(--border2);
+    }
+
+    .checklist li.checked {
+      background: rgba(29, 158, 117, .07);
+      border-color: rgba(29, 158, 117, .2);
+    }
+
+    .checklist li .cb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid var(--border2);
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .15s;
+    }
+
+    .checklist li.checked .cb {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .checklist li.checked .cb::after {
+      content: "✓";
+      font-size: 11px;
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .checklist li.checked .cb-text {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    /* SETTINGS (viscosity calc) */
+    .calc-wrap {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .range-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .range-group label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+
+    .range-group label span {
+      color: var(--accent2);
+      font-family: var(--font-display);
+      font-size: 17px;
+    }
+
+    input[type=range] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+
+    .calc-result {
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .cr-item .cr-val {
+      font-family: var(--font-display);
+      font-size: 24px;
+      color: var(--accent);
+    }
+
+    .cr-item .cr-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-top: 3px;
+    }
+
+    /* HERO LAYER VIZ */
+    .hero-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .hs-layer {
+      padding: .6rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 600;
+      transition: opacity .2s;
+    }
+
+    .hs-layer:hover {
+      opacity: .85;
+    }
+
+    /* MOBILE TOGGLE */
+    .mobile-menu-btn {
+      display: none;
+    }
+
+    @media(max-width:768px) {
+      .sidebar {
+        transform: translateX(-260px);
+        transition: transform .3s;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main {
+        margin-left: 0;
+      }
+
+      .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        cursor: pointer;
+        font-size: 18px;
+        color: var(--text);
+      }
+
+      .content {
+        padding: 1.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-text">АвтоМаляр</div>
+        <div class="logo-sub">PRO — Руководство по покраске</div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">Обзор</div>
+        <div class="nav-item active" data-section="overview"
+          onclick="navigate('overview',this)">
+          <div class="step-badge">🏠</div> Главная / Слои
+        </div>
+        <div class="nav-item" data-section="materials"
+          onclick="navigate('materials',this)">
+          <div class="step-badge">🛒</div> Материалы и цены
+        </div>
+        <div class="nav-item" data-section="equipment"
+          onclick="navigate('equipment',this)">
+          <div class="step-badge">🔧</div> Оборудование
+        </div>
+        <div class="nav-section" style="margin-top:.5rem">Этапы покраски</div>
+        <div class="nav-item" data-section="s1" onclick="navigate('s1',this)">
+          <div class="step-badge">1</div> Диагностика
+        </div>
+        <div class="nav-item" data-section="s2" onclick="navigate('s2',this)">
+          <div class="step-badge">2</div> Жестяные работы
+        </div>
+        <div class="nav-item" data-section="s3" onclick="navigate('s3',this)">
+          <div class="step-badge">3</div> Кислотный грунт
+        </div>
+        <div class="nav-item" data-section="s4" onclick="navigate('s4',this)">
+          <div class="step-badge">4</div> Шпатлёвка
+        </div>
+        <div class="nav-item" data-section="s5" onclick="navigate('s5',this)">
+          <div class="step-badge">5</div> Эпоксидный грунт
+        </div>
+        <div class="nav-item" data-section="s6" onclick="navigate('s6',this)">
+          <div class="step-badge">6</div> Грунт-наполнитель
+        </div>
+        <div class="nav-item" data-section="s7" onclick="navigate('s7',this)">
+          <div class="step-badge">7</div> База (цвет)
+        </div>
+        <div class="nav-item" data-section="s8" onclick="navigate('s8',this)">
+          <div class="step-badge">8</div> Лак
+        </div>
+        <div class="nav-item" data-section="s9" onclick="navigate('s9',this)">
+          <div class="step-badge">9</div> Полировка
+        </div>
+        <div class="nav-section" style="margin-top:.5rem">Инструменты</div>
+        <div class="nav-item" data-section="calc"
+          onclick="navigate('calc',this)">
+          <div class="step-badge">⚙️</div> Калькулятор вязкости
+        </div>
+        <div class="nav-item" data-section="defects"
+          onclick="navigate('defects',this)">
+          <div class="step-badge">🐛</div> Дефекты и решения
+        </div>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Прогресс обучения</span><span
+              id="prog-pct">0%</span></div>
+          <div class="progress-track">
+            <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--muted)">Отмечай шаги
+          выполненными →</div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div class="topbar">
+        <div style="display:flex;align-items:center;gap:12px">
+          <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+          <div class="topbar-title" id="topbar-title">ГЛАВНАЯ</div>
+        </div>
+        <div class="topbar-nav">
+          <button class="btn" id="btn-prev" onclick="prevStep()">←
+            Назад</button>
+          <button class="btn primary" id="btn-next" onclick="nextStep()">Далее
+            →</button>
+        </div>
+      </div>
+
+      <div class="content">
+
+        <!-- OVERVIEW -->
+        <div class="section active" id="sec-overview">
+          <div class="page-header">
+            <div class="tag"
+              style="background:rgba(232,89,60,.15);color:var(--accent)">
+              Система покраски</div>
+            <h1>Слои покраски</h1>
+            <p>Вся технология покраски автомобиля — от голого металла до
+              зеркального блеска. Изучай каждый слой и его назначение.</p>
+          </div>
+
+          <div class="card" style="margin-bottom:1.5rem">
+            <div class="card-title">Схема слоёв (снизу вверх)</div>
+            <div class="hero-stack">
+              <div class="hs-layer" style="background:#1a1a1a;color:#666">—
+                МЕТАЛЛ КУЗОВА —</div>
+              <div class="hs-layer"
+                style="background:rgba(29,100,200,.3);color:#92c4ef"
+                onclick="navigate('s3',null)">1. Кислотный грунт (wash primer)
+                &nbsp;·&nbsp; 10–15 мкм</div>
+              <div class="hs-layer"
+                style="background:rgba(60,52,137,.35);color:#c4bef5"
+                onclick="navigate('s4',null)">2. Шпатлёвка (при необходимости)
+                &nbsp;·&nbsp; до 5 мм</div>
+              <div class="hs-layer"
+                style="background:rgba(60,52,137,.55);color:#dddaf9"
+                onclick="navigate('s5',null)">3. Эпоксидный грунт &nbsp;·&nbsp;
+                60–80 мкм</div>
+              <div class="hs-layer"
+                style="background:rgba(99,153,34,.35);color:#b4d970"
+                onclick="navigate('s6',null)">4. Грунт-наполнитель
+                &nbsp;·&nbsp; 80–120 мкм</div>
+              <div class="hs-layer"
+                style="background:rgba(232,89,60,.4);color:#f09080"
+                onclick="navigate('s7',null)">5. База (цветной слой)
+                &nbsp;·&nbsp; 30–50 мкм</div>
+              <div class="hs-layer"
+                style="background:rgba(59,139,212,.45);color:#cce5f8"
+                onclick="navigate('s8',null)">6. Лак (2K прозрачный)
+                &nbsp;·&nbsp; 60–100 мкм</div>
+              <div class="hs-layer"
+                style="background:rgba(255,255,255,.08);color:#fff">✨ ПОЛИРОВКА
+                &nbsp;→&nbsp; ЗЕРКАЛО</div>
+            </div>
+            <div style="font-size:12px;color:var(--muted);margin-top:.75rem">
+              Нажми на любой слой — перейдёт к соответствующему шагу</div>
+          </div>
+
+          <div class="layer-stack">
+            <div class="card-title" style="padding:.5rem 0 .25rem">Подробно по
+              слоям</div>
+            <div class="layer"
+              style="background:rgba(29,100,200,.1);border-color:rgba(29,100,200,.25)"
+              onclick="navigate('s3',null)">
+              <div class="l-num">1</div>
+              <div class="l-info">
+                <div class="l-name">Кислотный / реактивный грунт (Wash Primer)
+                </div>
+                <div class="l-sub">Травит металл фосфорной кислотой, создаёт
+                  химическую адгезию. Наносится на голый металл.</div>
+              </div>
+              <div>
+                <div class="l-thick" style="color:#92c4ef">10–15 мкм</div>
+                <div class="l-grit">1–2 слоя</div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(200,200,50,.07);border-color:rgba(200,200,50,.15)">
+              <div class="l-num">—</div>
+              <div class="l-info">
+                <div class="l-name">Шпатлёвка полиэфирная</div>
+                <div class="l-sub">Выравнивает геометрию: вмятины, риски,
+                  неровности. Шлифуется P80→P120→P180→P240.</div>
+              </div>
+              <div>
+                <div class="l-thick" style="color:#d4d060">до 5 мм</div>
+                <div class="l-grit">по необходимости</div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(120,60,200,.1);border-color:rgba(120,60,200,.25)"
+              onclick="navigate('s5',null)">
+              <div class="l-num">2</div>
+              <div class="l-info">
+                <div class="l-name">Эпоксидный грунт (2K Epoxy)</div>
+                <div class="l-sub">Изолирует шпатлёвку от влаги, даёт отличную
+                  адгезию. Не шлифуется, только обезжиривается.</div>
+              </div>
+              <div>
+                <div class="l-thick" style="color:#c0a0f0">60–80 мкм</div>
+                <div class="l-grit">2 слоя</div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(99,153,34,.1);border-color:rgba(99,153,34,.25)"
+              onclick="navigate('s6',null)">
+              <div class="l-num">3</div>
+              <div class="l-info">
+                <div class="l-name">Грунт-наполнитель (2K Filler / Surfacer)
+                </div>
+                <div class="l-sub">Заполняет риски шлифовки, формирует гладкую
+                  поверхность под базу. Шлифуется P320→P400→P500→P600.</div>
+              </div>
+              <div>
+                <div class="l-thick" style="color:#b4d970">80–120 мкм</div>
+                <div class="l-grit">2–3 слоя</div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(232,89,60,.1);border-color:rgba(232,89,60,.25)"
+              onclick="navigate('s7',null)">
+              <div class="l-num">4</div>
+              <div class="l-info">
+                <div class="l-name">База (Basecoat)</div>
+                <div class="l-sub">Цветной слой. Не даёт блеска. Бывает solid,
+                  металлик, перламутр. НЕ шлифуется.</div>
+              </div>
+              <div>
+                <div class="l-thick" style="color:#f09080">30–50 мкм</div>
+                <div class="l-grit">2–3 слоя</div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(59,139,212,.1);border-color:rgba(59,139,212,.25)"
+              onclick="navigate('s8',null)">
+              <div class="l-num">5</div>
+              <div class="l-info">
+                <div class="l-name">Лак (2K Clearcoat)</div>
+                <div class="l-sub">Прозрачный двухкомпонентный. Даёт блеск,
+                  защищает от UV и механики. 2–3 слоя. Полируется.</div>
+              </div>
+              <div>
+                <div class="l-thick" style="color:#92c4ef">60–100 мкм</div>
+                <div class="l-grit">2–3 слоя</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MATERIALS -->
+        <div class="section" id="sec-materials">
+          <div class="page-header">
+            <div class="tag"
+              style="background:rgba(240,168,48,.12);color:var(--accent2)">
+              Закупка</div>
+            <h1>Материалы и цены</h1>
+            <p>Конкретные названия продуктов, которые можно купить и начать
+              учиться красить. Бюджетный и профессиональный варианты.</p>
+          </div>
+
+          <div class="tabs" id="mat-tabs">
+            <button class="tab-btn active"
+              onclick="switchTab('mat','budget')">💰 Бюджетный старт</button>
+            <button class="tab-btn" onclick="switchTab('mat','mid')">⚖️
+              Оптимальный</button>
+            <button class="tab-btn" onclick="switchTab('mat','pro')">💎
+              Профессиональный</button>
+          </div>
+
+          <div class="tab-content active" id="mat-budget">
+            <div class="alert tip">
+              <div class="alert-icon">💡</div>
+              <div>Бюджетный набор подходит для обучения и гаражного ремонта.
+                Результат возможен хороший — всё зависит от навыка и соблюдения
+                технологии.</div>
+            </div>
+            <table class="prod-table">
+              <thead>
+                <tr>
+                  <th>Слой</th>
+                  <th>Бренд / Продукт</th>
+                  <th>Стоимость</th>
+                  <th>Где купить</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="prod-badge"
+                      style="background:rgba(29,100,200,.2);color:#92c4ef">Кислотный
+                      грунт</span></td>
+                  <td>
+                    <div class="brand">VIKA</div>
+                    <div class="product-name">ВГС-073 Фосфатный грунт 2К /
+                      Кислотный ВЭП-0179</div>
+                  </td>
+                  <td class="price">400–700 ₽/л</td>
+                  <td>Автомагазины, ВД-Системы</td>
+                </tr>
+                <tr>
+                  <td><span class="prod-badge"
+                      style="background:rgba(200,200,50,.15);color:#d4d060">Шпатлёвка</span>
+                  </td>
+                  <td>
+                    <div class="brand">VIKA / Рем Колор</div>
+                    <div class="product-name">VIKA Универсальная полиэфирная +
+                      отвердитель</div>
+                  </td>
+                  <td class="price">500–900 ₽/кг</td>
+                  <td>Автомагазины</td>
+                </tr>
+                <tr>
+                  <td><span class="prod-badge"
+                      style="background:rgba(120,60,200,.2);color:#c0a0f0">Эпоксидный
+                      грунт</span></td>
+                  <td>
+                    <div class="brand">VIKA</div>
+                    <div class="product-name">ЭП-0228 Эпоксидный грунт 2К</div>
+                  </td>
+                  <td class="price">700–1 000 ₽/л</td>
+                  <td>Автомагазины</td>
+                </tr>
+                <tr>
+                  <td><span class="prod-badge"
+                      style="background:rgba(99,153,34,.2);color:#b4d970">Наполнитель</span>
+                  </td>
+                  <td>
+                    <div class="brand">VIKA / Mixon</div>
+                    <div class="product-name">VIKA Акриловый грунт-наполнитель
+                      2К 4+1</div>
+                  </td>
+                  <td class="price">600–1 000 ₽/л</td>
+                  <td>Автомагазины</td>
+                </tr>
+                <tr>
+                  <td><span class="prod-badge"
+                      style="background:rgba(232,89,60,.2);color:#f09080">База</span>
+                  </td>
+                  <td>
+                    <div class="brand">VIKA / MOBIHEL</div>
+                    <div class="product-name">VIKA-МЕТАЛЛИК базовые эмали
+                      (подбор по коду)</div>
+                  </td>
+                  <td class="price">800–1 500 ₽/л</td>
+                  <td>Автоколор, ColorSystems</td>
+                </tr>
+                <tr>
+                  <td><span class="prod-badge"
+                      style="background:rgba(59,139,212,.2);color:#92c4ef">Лак</span>
+                  </td>
+                  <td>
+                    <div class="brand">NOVOL / VIKA</div>
+                    <div class="product-name">Novol Plus 710 / VIKA-Лак
+                      акриловый 2К</div>
+                  </td>
+                  <td class="price">900–1 400 ₽/л</td>
+                  <td>Автомагазины</td>
+                </tr>
+                <tr>
+                  <td><span class="prod-badge"
+                      style="background:rgba(255,255,255,.07);color:var(--muted)">Разбавитель</span>
+                  </td>
+                  <td>
+                    <div class="brand">VIKA / Mixon</div>
+                    <div class="product-name">Разбавитель акриловый
+                      универсальный (стандарт)</div>
+                  </td>
+                  <td class="price">300–600 ₽/л</td>
+                  <td>Автомагазины</td>
+                </tr>
+                <tr>
+                  <td><span class="prod-badge"
+                      style="background:rgba(255,255,255,.07);color:var(--muted)">Обезжириватель</span>
+                  </td>
+                  <td>
+                    <div class="brand">NOVOL / VIKA</div>
+                    <div class="product-name">Антисиликон + обезжириватель на
+                      основе изопропанола</div>
+                  </td>
+                  <td class="price">200–500 ₽/л</td>
+                  <td>Автомагазины</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="alert success" style="margin-top:1rem">
+              <div class="alert-icon">✅</div>
+              <div><strong>Итог на капот:</strong> ~3 000–5 000 ₽ за все
+                материалы (без краски — подбор отдельно). VIKA доступна во всех
+                регионах РФ.</div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="mat-mid">
+            <div class="alert tip">
+              <div class="alert-icon">💡</div>
+              <div>Оптимальный набор — лучший баланс цена/качество. Рекомендуем
+                тем, кто серьёзно хочет освоить профессию.</div>
+            </div>
+            <table class="prod-table">
+              <thead>
+                <tr>
+                  <th>Слой</th>
+                  <th>Бренд / Продукт</th>
+                  <th>Стоимость</th>
+                  <th>Примечание</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="prod-badge"
+                      style="background:rgba(29,100,200,.2);color:#92c4ef">Кислотный
+                      грунт</span></td>
+                  <td>
+                    <div class="brand">NOVOL</div>
+                    <div class="product-name">Novol Protect 340 Wash Primer 2К
+                    </div>
+                  </td>
+                  <td class="price">1 000–1 400 ₽/л</td>
+                  <td>Стабильное качество</td>
+                </tr>
+                <tr>
+                  <td><span class="prod-badge"
+                      style="background:rgba(200,200,50,.15);color:#d4d060">Шпатлёвка</span>
+                  </td>
+                  <td>
+                    <div class="brand">NOVOL / TROTON</div>
+                    <div class="product-name">Novol Plus 710 Szpachlówka /
+                      TROTON Univ. Filler</div>
+                  </td>
+                  <td class="price">700–1 100 ₽/кг</td>
+                  <td>Хорошо шлифуется</td>
+                </tr>
+                <tr>
+                  <td><span class="prod-badge"
+                      style="background:rgba(120,60,200,.2);color:#c0a0f0">Эпоксидный
+                      грунт</span></td>
+                  <td>
+                    <div class="brand">NOVOL</div>
+                    <div class="product-name">Novol Protect 360 Epoxy Primer 2К
+                    </div>
+                  </td>
+                  <td class="price">1 400–1 800 ₽/л</td>
+                  <td>Отличная изоляция</td>
+                </tr>
+                <tr>
+                  <td><span class="prod-badge"
+                      style="background:rgba(99,153,34,.2);color:#b4d970">Наполнитель</span>
+                  </td>
+                  <td>
+                    <div class="brand">NOVOL / TROTON</div>
+                    <div class="product-name">Novol Plast 710 / TROTON Spray
+                      Filler 5:1</div>
+                  </td>
+                  <td class="price">1 200–1 700 ₽/л</td>
+                  <td>Легко шлифуется</td>
+                </tr>
+                <tr>
+                  <td><span class="prod-badge"
+                      style="background:rgba(232,89,60,.2);color:#f09080">База</span>
+                  </td>
+                  <td>
+                    <div class="brand">MOBIHEL / DYNACOAT</div>
+                    <div class="product-name">Mobihel Base Coat / Dynacoat
+                      Basecoat</div>
+                  </td>
+                  <td class="price">1 200–2 500 ₽/л</td>
+                  <td>Широкий подбор цветов</td>
+                </tr>
+                <tr>
+                  <td><span class="prod-badge"
+                      style="background:rgba(59,139,212,.2);color:#92c4ef">Лак</span>
+                  </td>
+                  <td>
+                    <div class="brand">NOVOL / DYNACOAT</div>
+                    <div class="product-name">Novol Spectral 540 HS / Dynacoat
+                      Clearcoat HS</div>
+                  </td>
+                  <td class="price">1 500–2 200 ₽/л</td>
+                  <td>HS = высокое твёрдое</td>
+          </div>
+          </tr>
+          <tr>
+            <td><span class="prod-badge"
+                style="background:rgba(255,255,255,.07);color:var(--muted)">Отвердитель</span>
+            </td>
+            <td>
+              <div class="brand">В комплекте</div>
+              <div class="product-name">Соответствующий отвердитель к системе
+                (стандарт/быстрый/медленный)</div>
+            </td>
+            <td class="price">500–900 ₽</td>
+            <td>Выбор по температуре</td>
+          </tr>
+          </tbody>
+          </table>
+          <div class="alert success" style="margin-top:1rem">
+            <div class="alert-icon">✅</div>
+            <div><strong>Итог на капот:</strong> ~6 000–10 000 ₽. NOVOL —
+              польский бренд с хорошей репутацией. Широко доступен в РФ.</div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="mat-pro">
+          <div class="alert tip">
+            <div class="alert-icon">💡</div>
+            <div>Профессиональные материалы используют в сертифицированных
+              кузовных центрах. Требуют точного соблюдения технологии.</div>
+          </div>
+          <table class="prod-table">
+            <thead>
+              <tr>
+                <th>Слой</th>
+                <th>Бренд / Продукт</th>
+                <th>Стоимость</th>
+                <th>Особенность</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="prod-badge"
+                    style="background:rgba(29,100,200,.2);color:#92c4ef">Кислотный
+                    грунт</span></td>
+                <td>
+                  <div class="brand">SIKKENS / R-M</div>
+                  <div class="product-name">Sikkens Wash Primer CR / R-M
+                    DIAMONT Wash Primer</div>
+                </td>
+                <td class="price">2 500–4 000 ₽/л</td>
+                <td>Эталонная адгезия</td>
+              </tr>
+              <tr>
+                <td><span class="prod-badge"
+                    style="background:rgba(200,200,50,.15);color:#d4d060">Шпатлёвка</span>
+                </td>
+                <td>
+                  <div class="brand">GLASURIT / SIKKENS</div>
+                  <div class="product-name">Glasurit 839-150 / Sikkens Palinal
+                    Uni Füller</div>
+                </td>
+                <td class="price">2 000–3 500 ₽/кг</td>
+                <td>Минимальная усадка</td>
+              </tr>
+              <tr>
+                <td><span class="prod-badge"
+                    style="background:rgba(120,60,200,.2);color:#c0a0f0">Эпоксидный
+                    грунт</span></td>
+                <td>
+                  <div class="brand">SIKKENS / AXALTA</div>
+                  <div class="product-name">Sikkens Epoxy HS 2К / Axalta
+                    Chromaprime Epoxy</div>
+                </td>
+                <td class="price">3 000–5 000 ₽/л</td>
+                <td>Лучшая влагостойкость</td>
+              </tr>
+              <tr>
+                <td><span class="prod-badge"
+                    style="background:rgba(99,153,34,.2);color:#b4d970">Наполнитель</span>
+                </td>
+                <td>
+                  <div class="brand">GLASURIT / SIKKENS</div>
+                  <div class="product-name">Glasurit 285-55 HS / Sikkens
+                    Autoclear LV</div>
+                </td>
+                <td class="price">2 500–4 000 ₽/л</td>
+                <td>HS технология</td>
+              </tr>
+              <tr>
+                <td><span class="prod-badge"
+                    style="background:rgba(232,89,60,.2);color:#f09080">База</span>
+                </td>
+                <td>
+                  <div class="brand">GLASURIT / R-M</div>
+                  <div class="product-name">Glasurit 22-Line Basecoat / R-M
+                    DIAMONT Base</div>
+                </td>
+                <td class="price">3 500–7 000 ₽/л</td>
+                <td>Заводской цвет</td>
+              </tr>
+              <tr>
+                <td><span class="prod-badge"
+                    style="background:rgba(59,139,212,.2);color:#92c4ef">Лак</span>
+                </td>
+                <td>
+                  <div class="brand">GLASURIT / SIKKENS</div>
+                  <div class="product-name">Glasurit 923-235 HS / Sikkens
+                    Autoclear LV Superior</div>
+                </td>
+                <td class="price">4 000–7 000 ₽/л</td>
+                <td>Макс. блеск и стойкость</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="alert warn" style="margin-top:1rem">
+            <div class="alert-icon">⚠️</div>
+            <div>Профессиональные системы (GLASURIT, SIKKENS) часто продаются
+              только через авторизованных дистрибьюторов. Для старта — не
+              обязательны.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EQUIPMENT -->
+      <div class="section" id="sec-equipment">
+        <div class="page-header">
+          <div class="tag"
+            style="background:rgba(232,89,60,.12);color:var(--accent)">
+            Инструменты</div>
+          <h1>Оборудование</h1>
+          <p>Всё что нужно для покраски — от краскопульта до полировальной
+            машины.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Краскопульт (пистолет)</div>
+          <table class="prod-table">
+            <thead>
+              <tr>
+                <th>Модель</th>
+                <th>Тип</th>
+                <th>Дюза</th>
+                <th>Цена</th>
+                <th>Подходит для</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="brand">DeVilbiss SLG-620</td>
+                <td>LVLP</td>
+                <td>1.3/1.5мм</td>
+                <td class="price">5 000–9 000 ₽</td>
+                <td>Старт, гараж</td>
+              </tr>
+              <tr>
+                <td class="brand">Iwata W-400</td>
+                <td>HVLP</td>
+                <td>1.3/1.4мм</td>
+                <td class="price">12 000–18 000 ₽</td>
+                <td>Уверенный уровень</td>
+              </tr>
+              <tr>
+                <td class="brand">SATA Jet 5000B</td>
+                <td>HVLP/RP</td>
+                <td>1.2–1.5мм</td>
+                <td class="price">40 000–55 000 ₽</td>
+                <td>Профессиональный</td>
+              </tr>
+              <tr>
+                <td class="brand">DeVilbiss DV1</td>
+                <td>HVLP</td>
+                <td>1.2/1.3мм</td>
+                <td class="price">28 000–38 000 ₽</td>
+                <td>Профессиональный</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="alert tip" style="margin-top:.75rem">
+            <div class="alert-icon">💡</div>
+            <div>Для новичка DeVilbiss SLG-620 — оптимальный выбор. Учишься
+              правильно держать дистанцию и давление — потом переходишь на
+              дорогой.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Компрессор</div>
+          <div class="step-grid">
+            <div class="info-box">
+              <div class="ib-label">Минимальные требования</div>
+              <ul>
+                <li>Производительность: 250+ л/мин</li>
+                <li>Ресивер: от 50 литров</li>
+                <li>Рабочее давление: 6–8 бар</li>
+                <li>Влагоотделитель — обязательно!</li>
+              </ul>
+            </div>
+            <div class="info-box">
+              <div class="ib-label">Рекомендуемые модели</div>
+              <ul>
+                <li>Fubag B3800/100 — от 18 000 ₽</li>
+                <li>Kraftool КПМ-24/250 — от 22 000 ₽</li>
+                <li>Remeza СБ4/С-100.LB30 — от 35 000 ₽</li>
+                <li>ABAC Pole Position — от 45 000 ₽</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Остальное оборудование</div>
+          <table class="prod-table">
+            <thead>
+              <tr>
+                <th>Инструмент</th>
+                <th>Для чего</th>
+                <th>Цена</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="brand">Орбитальная шлифмашинка</td>
+                <td>Шлифовка шпатлёвки и наполнителя</td>
+                <td class="price">3 000–8 000 ₽</td>
+              </tr>
+              <tr>
+                <td class="brand">Полировальная машина (эксцентрик)</td>
+                <td>Финишная полировка лака</td>
+                <td class="price">5 000–15 000 ₽</td>
+              </tr>
+              <tr>
+                <td class="brand">Полумаска 3M 6200 + фильтры A2P3</td>
+                <td>Защита при работе с грунтами/лаком</td>
+                <td class="price">800–1 500 ₽</td>
+              </tr>
+              <tr>
+                <td class="brand">Вискозиметр ДИН-4</td>
+                <td>Контроль вязкости материалов</td>
+                <td class="price">300–500 ₽</td>
+              </tr>
+              <tr>
+                <td class="brand">Манометр для пистолета</td>
+                <td>Точное давление на входе</td>
+                <td class="price">400–800 ₽</td>
+              </tr>
+              <tr>
+                <td class="brand">ИК-лампа для сушки</td>
+                <td>Ускорение сушки слоёв (аренда от 300 ₽/ч)</td>
+                <td class="price">15 000–40 000 ₽</td>
+              </tr>
+              <tr>
+                <td class="brand">Шлифовальные бруски</td>
+                <td>Ручная шлифовка</td>
+                <td class="price">300–800 ₽</td>
+              </tr>
+              <tr>
+                <td class="brand">Шкурка P80–P3000 (набор)</td>
+                <td>Все этапы шлифовки</td>
+                <td class="price">1 000–2 000 ₽</td>
+              </tr>
+              <tr>
+                <td class="brand">Липкая салфетка (tack cloth)</td>
+                <td>Убрать пыль перед каждым слоем</td>
+                <td class="price">50–150 ₽/шт</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="section" id="sec-s1">
+        <div class="page-header">
+          <div class="tag"
+            style="background:rgba(255,255,255,.07);color:var(--muted)">Шаг 1
+            из 9</div>
+          <h1>Диагностика</h1>
+          <p>Осматриваем деталь и определяем объём работ.</p>
+        </div>
+        <div class="step-grid">
+          <div class="info-box">
+            <div class="ib-label">Что смотрим</div>
+            <ul>
+              <li>Ржавчину (поверхностная / сквозная)</li>
+              <li>Сколы до металла</li>
+              <li>Вмятины и деформации</li>
+              <li>Состояние старой краски</li>
+              <li>Трещины и отслоения лака</li>
+            </ul>
+          </div>
+          <div class="info-box">
+            <div class="ib-label">Метод осмотра</div>
+            <ul>
+              <li>Боковое освещение (лампа / фонарь)</li>
+              <li>Потрогать рукой — чувствуем неровности</li>
+              <li>Правило (ровная рейка) — проверка геометрии</li>
+              <li>Осмотр снятой детали</li>
+            </ul>
+          </div>
+        </div>
+        <div style="margin-top:1rem">
+          <div class="card-title">Что определяет технологию</div>
+          <div class="layer-stack">
+            <div class="layer"
+              style="background:rgba(29,158,117,.07);border-color:rgba(29,158,117,.2)">
+              <div class="l-num">🟢</div>
+              <div class="l-info">
+                <div class="l-name">Только царапины ЛКП</div>
+                <div class="l-sub">→ Локальный ремонт, возможна покраска без
+                  снятия всей краски</div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(240,168,48,.07);border-color:rgba(240,168,48,.2)">
+              <div class="l-num">🟡</div>
+              <div class="l-info">
+                <div class="l-name">Сколы до металла</div>
+                <div class="l-sub">→ Обязательно кислотный грунт на все
+                  обнажённые места</div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(232,89,60,.07);border-color:rgba(232,89,60,.2)">
+              <div class="l-num">🔴</div>
+              <div class="l-info">
+                <div class="l-name">Ржавчина</div>
+                <div class="l-sub">→ Полное удаление + фосфатирование +
+                  кислотный грунт</div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(120,60,200,.07);border-color:rgba(120,60,200,.2)">
+              <div class="l-num">⚪</div>
+              <div class="l-info">
+                <div class="l-name">Много старой шпатлёвки / вздутия</div>
+                <div class="l-sub">→ Сбивать до металла, начинать с нуля</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="alert tip" style="margin-top:1rem">
+          <div class="alert-icon">💡</div>
+          <div>Новичку: снимай капот с машины — работать удобнее. Положи на
+            козлы или стол.</div>
+        </div>
+        <div style="margin-top:1.5rem">
+          <div class="card-title">Чеклист: диагностика</div>
+          <ul class="checklist" id="cl-s1">
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Осмотрел деталь при боковом освещении</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Нашёл все зоны ржавчины и сколов</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Определил тип ремонта (локальный / полный)
+              </div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Снял деталь и установил на удобной высоте
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="section" id="sec-s2">
+        <div class="page-header">
+          <div class="tag"
+            style="background:rgba(255,255,255,.07);color:var(--muted)">Шаг 2
+            из 9</div>
+          <h1>Жестяные работы</h1>
+          <p>Рихтовка, удаление ржавчины, подготовка металла.</p>
+        </div>
+        <div class="step-grid">
+          <div class="info-box">
+            <div class="ib-label">Инструменты</div>
+            <ul>
+              <li>Молоток рихтовочный + оправки</li>
+              <li>Болгарка + скотч-брайт P80</li>
+              <li>Дрель + насадка-ёршик</li>
+              <li>Фен строительный (сушка)</li>
+              <li>Цинкарь / Фосфомет / Преобразователь ржавчины</li>
+            </ul>
+          </div>
+          <div class="info-box">
+            <div class="ib-label">Порядок работы</div>
+            <ul>
+              <li>Рихтуем вмятины молотком</li>
+              <li>Болгаркой сбиваем ржавчину до металла</li>
+              <li>Наносим кислоту (Цинкарь) — 10–15 мин</li>
+              <li>Смываем водой, сушим феном</li>
+              <li>Шлифуем P80 для адгезии</li>
+            </ul>
+          </div>
+        </div>
+        <div class="alert warn" style="margin-top:1rem">
+          <div class="alert-icon">⚠️</div>
+          <div>Не оставляй голый металл без грунта дольше 30 минут — начинает
+            ржаветь на воздухе!</div>
+        </div>
+        <div class="alert tip">
+          <div class="alert-icon">💡</div>
+          <div>Маленькие вмятины (до 5 мм) — можно выровнять шпатлёвкой.
+            Большие — обязательно рихтовать, иначе шпатлёвка трескается.</div>
+        </div>
+        <div style="margin-top:1.5rem">
+          <div class="card-title">Чеклист: жесть</div>
+          <ul class="checklist">
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Отрихтованы все вмятины</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Ржавчина удалена до чистого металла</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Нанесён и смыт преобразователь ржавчины
+              </div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Металл обезжирен, высушен</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Зашкурен P80 для адгезии</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="section" id="sec-s3">
+        <div class="page-header">
+          <div class="tag"
+            style="background:rgba(29,100,200,.15);color:#92c4ef">Шаг 3 из 9
+          </div>
+          <h1>Кислотный грунт</h1>
+          <p>Wash primer — первая защита металла. Химическая адгезия.</p>
+        </div>
+        <div class="grid-2" style="margin-bottom:1rem">
+          <div class="mini-card">
+            <div class="mc-label">Слоёв</div>
+            <div class="mc-val">1–2</div>
+            <div class="mc-sub">Тонких, не толще 15 мкм суммарно</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Толщина</div>
+            <div class="mc-val">10–15 мкм</div>
+            <div class="mc-sub">Не нужно больше</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Вязкость</div>
+            <div class="mc-val">12–14 сек</div>
+            <div class="mc-sub">По вискозиметру ДИН-4</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Давление</div>
+            <div class="mc-val">1.5–2 бар</div>
+            <div class="mc-sub">На входе в пистолет</div>
+          </div>
+        </div>
+        <div class="step-grid">
+          <div class="info-box">
+            <div class="ib-label">Технология нанесения</div>
+            <ul>
+              <li>Дюза: 1.3–1.5 мм</li>
+              <li>Расстояние: 15–20 см от поверхности</li>
+              <li>Движения быстрые, флейц лёгкий</li>
+              <li>2 слоя с паузой 5 мин</li>
+              <li>Выдержка 30 мин перед шпатлёвкой</li>
+            </ul>
+          </div>
+          <div class="info-box">
+            <div class="ib-label">Важно помнить</div>
+            <ul>
+              <li>НЕ шлифовать кислотник!</li>
+              <li>Наносить ТОЛЬКО на голый металл</li>
+              <li>Работать ТОЛЬКО в маске A2P3</li>
+              <li>Смешивать 1:1 с разбавителем</li>
+              <li>Использовать сразу после смешивания</li>
+            </ul>
+          </div>
+        </div>
+        <div class="alert danger">
+          <div class="alert-icon">☠️</div>
+          <div>Кислотный грунт токсичен! Изоцианаты + кислота. Обязательна
+            полумаска с фильтрами A2/P3, перчатки нитриловые, очки. Работай с
+            вентиляцией!</div>
+        </div>
+        <div style="margin-top:1rem">
+          <div class="card-title">Чеклист</div>
+          <ul class="checklist">
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Надета защита: маска A2P3, перчатки, очки
+              </div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Металл обезжирен антисиликоном</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Грунт смешан в правильной пропорции</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Нанесено 1–2 тонких слоя</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Выдержано 30+ мин перед следующим слоем
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="section" id="sec-s4">
+        <div class="page-header">
+          <div class="tag"
+            style="background:rgba(200,200,50,.1);color:#d4d060">Шаг 4 из 9
+          </div>
+          <h1>Шпатлёвка</h1>
+          <p>Выравниваем геометрию — убираем неровности и риски.</p>
+        </div>
+        <div class="grid-2" style="margin-bottom:1rem">
+          <div class="mini-card">
+            <div class="mc-label">Отвердитель</div>
+            <div class="mc-val">2–3%</div>
+            <div class="mc-sub">От массы шпатлёвки</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Время открытия</div>
+            <div class="mc-val">5–8 мин</div>
+            <div class="mc-sub">Работай быстро</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Начало шлифовки</div>
+            <div class="mc-val">20–30 мин</div>
+            <div class="mc-sub">При 20°C</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Макс. слой</div>
+            <div class="mc-val">5 мм</div>
+            <div class="mc-sub">За один раз</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Схема шлифовки шпатлёвки</div>
+          <div class="layer-stack">
+            <div class="layer"
+              style="background:rgba(200,200,50,.06);border-color:rgba(200,200,50,.15)">
+              <div class="l-num">①</div>
+              <div class="l-info">
+                <div class="l-name">P80 — грубая шлифовка</div>
+                <div class="l-sub">Убираем лишнюю шпатлёвку, формируем форму
+                </div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(200,200,50,.08);border-color:rgba(200,200,50,.18)">
+              <div class="l-num">②</div>
+              <div class="l-info">
+                <div class="l-name">P120 — среднее зерно</div>
+                <div class="l-sub">Убираем риски от P80, корректируем форму
+                </div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(200,200,50,.1);border-color:rgba(200,200,50,.2)">
+              <div class="l-num">③</div>
+              <div class="l-info">
+                <div class="l-name">P180 — финиш шпатлёвки</div>
+                <div class="l-sub">Готовим поверхность под наполнитель</div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(200,200,50,.12);border-color:rgba(200,200,50,.25)">
+              <div class="l-num">④</div>
+              <div class="l-info">
+                <div class="l-name">P240 — перед эпоксидным грунтом</div>
+                <div class="l-sub">Убираем все риски P180, поверхность матовая
+                  и равная</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="alert tip">
+          <div class="alert-icon">💡</div>
+          <div>Guide coat (напыл-контролёр): нанеси чёрную краску из баллончика
+            на зашпатлёванную поверхность, шлифуй — пока виден чёрный цвет,
+            есть риски и ямки.</div>
+        </div>
+        <div style="margin-top:1rem">
+          <div class="card-title">Чеклист</div>
+          <ul class="checklist">
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Шпатлёвка смешана с 2–3% отвердителя</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Нанесена тонкими слоями (не толще 5 мм)
+              </div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Отшлифовано: P80 → P120 → P180 → P240</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Guide coat показал — рисок нет</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Проверено правилом — поверхность ровная
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="section" id="sec-s5">
+        <div class="page-header">
+          <div class="tag"
+            style="background:rgba(120,60,200,.15);color:#c0a0f0">Шаг 5 из 9
+          </div>
+          <h1>Эпоксидный грунт</h1>
+          <p>Изолируем шпатлёвку. Создаём идеальную основу.</p>
+        </div>
+        <div class="grid-2" style="margin-bottom:1rem">
+          <div class="mini-card">
+            <div class="mc-label">Смешивание</div>
+            <div class="mc-val">2:1</div>
+            <div class="mc-sub">Грунт:отвердитель (по инструкции)</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Слоёв</div>
+            <div class="mc-val">2</div>
+            <div class="mc-sub">С выдержкой 5–10 мин</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Толщина</div>
+            <div class="mc-val">60–80 мкм</div>
+            <div class="mc-sub">Суммарно</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Сушка</div>
+            <div class="mc-val">2–4 часа</div>
+            <div class="mc-sub">При 20°C (45 мин ИК)</div>
+          </div>
+        </div>
+        <div class="step-grid">
+          <div class="info-box">
+            <div class="ib-label">Параметры нанесения</div>
+            <ul>
+              <li>Дюза: 1.5–1.8 мм</li>
+              <li>Давление: 2–2.5 бар</li>
+              <li>Вязкость: 20–25 сек ДИН-4</li>
+              <li>Расстояние: 20 см</li>
+              <li>Перекрытие флейца: 50%</li>
+            </ul>
+          </div>
+          <div class="info-box">
+            <div class="ib-label">Что нельзя делать</div>
+            <ul>
+              <li>Шлифовать эпоксидный грунт!</li>
+              <li>Наносить на влажную поверхность</li>
+              <li>Смешивать с другими материалами</li>
+              <li>Наносить толстым слоем за раз</li>
+            </ul>
+          </div>
+        </div>
+        <div class="alert tip">
+          <div class="alert-icon">💡</div>
+          <div>Эпоксидный грунт — барьер от влаги. Он не шлифуется, только
+            обезжиривается перед наполнителем. Это правило нарушать нельзя.
+          </div>
+        </div>
+        <div style="margin-top:1rem">
+          <div class="card-title">Чеклист</div>
+          <ul class="checklist">
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Поверхность обезжирена антисиликоном</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Грунт смешан по инструкции (2:1)</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Нанесено 2 слоя с паузой 5–10 мин</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Выдержано 2+ часа сушки</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Обезжирена поверхность перед наполнителем
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 6 -->
+      <div class="section" id="sec-s6">
+        <div class="page-header">
+          <div class="tag"
+            style="background:rgba(99,153,34,.15);color:#b4d970">Шаг 6 из 9
+          </div>
+          <h1>Грунт-наполнитель</h1>
+          <p>Заполняем риски шлифовки. Создаём идеальную поверхность под базу.
+          </p>
+        </div>
+        <div class="grid-2" style="margin-bottom:1rem">
+          <div class="mini-card">
+            <div class="mc-label">Смешивание</div>
+            <div class="mc-val">4:1:1</div>
+            <div class="mc-sub">Грунт:отвердитель:разбавитель</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Слоёв</div>
+            <div class="mc-val">2–3</div>
+            <div class="mc-sub">1-й тонкий, 2-й полный</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Шлифовка</div>
+            <div class="mc-val">P320→P600</div>
+            <div class="mc-sub">Мокрой или сухой</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Сушка</div>
+            <div class="mc-val">3–4 часа</div>
+            <div class="mc-sub">При 20°C (45 мин ИК)</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Схема шлифовки наполнителя</div>
+          <div class="layer-stack">
+            <div class="layer"
+              style="background:rgba(99,153,34,.05);border-color:rgba(99,153,34,.15)">
+              <div class="l-num">①</div>
+              <div class="l-info">
+                <div class="l-name">P320 — грубая шлифовка наполнителя</div>
+                <div class="l-sub">Убираем шагрень и неровности после нанесения
+                </div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(99,153,34,.08);border-color:rgba(99,153,34,.2)">
+              <div class="l-num">②</div>
+              <div class="l-info">
+                <div class="l-name">P400 — среднее выравнивание</div>
+                <div class="l-sub">Убираем риски P320</div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(99,153,34,.1);border-color:rgba(99,153,34,.25)">
+              <div class="l-num">③</div>
+              <div class="l-info">
+                <div class="l-name">P500/P600 — финиш под базу</div>
+                <div class="l-sub">Поверхность готова под нанесение цвета</div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(99,153,34,.13);border-color:rgba(99,153,34,.3)">
+              <div class="l-num">④</div>
+              <div class="l-info">
+                <div class="l-name">P800 мокрой (опционально)</div>
+                <div class="l-sub">Только если хочешь идеально гладкую базу
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="alert tip">
+          <div class="alert-icon">💡</div>
+          <div>Снова используй guide coat между шлифовками. Правило простое:
+            пока есть чёрный — есть риски. Шлифуй до полного исчезновения.
+          </div>
+        </div>
+        <div style="margin-top:1rem">
+          <div class="card-title">Чеклист</div>
+          <ul class="checklist">
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Смешан по инструкции (4:1:1)</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Нанесено 2–3 слоя</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Высох 3–4 часа</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Отшлифован: P320→P400→P500→P600</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Guide coat показал — поверхность чистая
+              </div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Обезжирена, протёрта tack cloth</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 7 -->
+      <div class="section" id="sec-s7">
+        <div class="page-header">
+          <div class="tag"
+            style="background:rgba(232,89,60,.15);color:var(--accent)">Шаг 7 из
+            9</div>
+          <h1>База (цветной слой)</h1>
+          <p>Наносим цвет. Главное — равномерность и правильная техника.</p>
+        </div>
+        <div class="grid-2" style="margin-bottom:1rem">
+          <div class="mini-card">
+            <div class="mc-label">Дюза</div>
+            <div class="mc-val">1.3–1.4 мм</div>
+            <div class="mc-sub">Для базы</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Давление</div>
+            <div class="mc-val">1.5–2 бар</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Слоёв</div>
+            <div class="mc-val">2–3</div>
+            <div class="mc-sub">Зависит от цвета</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Расстояние</div>
+            <div class="mc-val">15–20 см</div>
+          </div>
+        </div>
+        <div class="step-grid">
+          <div class="info-box">
+            <div class="ib-label">Схема нанесения</div>
+            <ul>
+              <li>1-й слой: ориентирующий, лёгкий туман</li>
+              <li>Пауза: 5–10 мин (базу не подсушивают)</li>
+              <li>2-й слой: полноценный, перекрытие 50–60%</li>
+              <li>3-й слой (металлик): дальше и суше</li>
+              <li>Последний флейц металлика — горизонтальный</li>
+            </ul>
+          </div>
+          <div class="info-box">
+            <div class="ib-label">Правила базы</div>
+            <ul>
+              <li>НЕЛЬЗЯ шлифовать базу!</li>
+              <li>Tack cloth перед каждым слоем</li>
+              <li>Равномерная скорость движения</li>
+              <li>Боковое освещение — контроль</li>
+              <li>Потёк — ждать 24ч, потом срезать</li>
+            </ul>
+          </div>
+        </div>
+        <div class="alert warn">
+          <div class="alert-icon">⚠️</div>
+          <div>База НЕ даёт блеска и НЕ защищает покрытие — она только цвет.
+            Блеск и защита — это лак, следующий шаг.</div>
+        </div>
+        <div style="margin-top:1rem">
+          <div class="card-title">Чеклист</div>
+          <ul class="checklist">
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Поверхность обезжирена антисиликоном</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Протёрта липкой салфеткой (tack cloth)</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Нанесено 2–3 слоя базы</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Цвет равномерный, нет пятен и полос</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Выдержано 15–20 мин перед лаком</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 8 -->
+      <div class="section" id="sec-s8">
+        <div class="page-header">
+          <div class="tag"
+            style="background:rgba(59,139,212,.15);color:#92c4ef">Шаг 8 из 9
+          </div>
+          <h1>Лак</h1>
+          <p>Финишный защитный слой. От него зависит блеск и долговечность.</p>
+        </div>
+        <div class="grid-2" style="margin-bottom:1rem">
+          <div class="mini-card">
+            <div class="mc-label">Смешивание</div>
+            <div class="mc-val">2:1</div>
+            <div class="mc-sub">Лак:отвердитель</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Вязкость</div>
+            <div class="mc-val">20–25 сек</div>
+            <div class="mc-sub">ДИН-4</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Слоёв</div>
+            <div class="mc-val">2–3</div>
+            <div class="mc-sub">С паузой 10–15 мин</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Давление</div>
+            <div class="mc-val">2–2.5 бар</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Схема нанесения лака</div>
+          <div class="layer-stack">
+            <div class="layer"
+              style="background:rgba(59,139,212,.07);border-color:rgba(59,139,212,.2)">
+              <div class="l-num">①</div>
+              <div class="l-info">
+                <div class="l-name">1-й слой — лёгкий «туман»</div>
+                <div class="l-sub">30% перекрытие. Связывает базу с лаком.
+                  Может казаться матовым — это нормально.</div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(59,139,212,.1);border-color:rgba(59,139,212,.25)">
+              <div class="l-num">②</div>
+              <div class="l-info">
+                <div class="l-name">2-й слой — основной (через 10–15 мин)</div>
+                <div class="l-sub">60% перекрытие. Должен дать зеркало.
+                  Медленные равномерные движения.</div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(59,139,212,.13);border-color:rgba(59,139,212,.3)">
+              <div class="l-num">③</div>
+              <div class="l-info">
+                <div class="l-name">3-й слой — при необходимости</div>
+                <div class="l-sub">Если после 2-го есть шагрень или мало
+                  блеска.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="alert tip">
+          <div class="alert-icon">💡</div>
+          <div>Потёк в лаке — не паника! Даём полностью высохнуть (24ч). Затем
+            P2000 мокрой шлифовкой, P3000 и полировка. Будет зеркало.</div>
+        </div>
+        <div class="alert danger">
+          <div class="alert-icon">☠️</div>
+          <div>Лак 2K содержит изоцианаты. Маска A2P3 — обязательна. Без маски
+            — онкогенные вещества в лёгких.</div>
+        </div>
+        <div style="margin-top:1rem">
+          <div class="card-title">Чеклист</div>
+          <ul class="checklist">
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Надета маска A2P3</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Протёрта tack cloth перед лаком</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Нанесено 2–3 слоя</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Поверхность зеркальная после последнего слоя
+              </div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Сушка 24 часа перед полировкой</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 9 -->
+      <div class="section" id="sec-s9">
+        <div class="page-header">
+          <div class="tag"
+            style="background:rgba(29,158,117,.15);color:#70d4b0">Шаг 9 из 9
+          </div>
+          <h1>Полировка</h1>
+          <p>Финал. Убираем шагрень и пыль. Получаем зеркало.</p>
+        </div>
+        <div class="grid-2" style="margin-bottom:1rem">
+          <div class="mini-card">
+            <div class="mc-label">Ждём после лака</div>
+            <div class="mc-val">24–48ч</div>
+            <div class="mc-sub">При 20°C</div>
+          </div>
+          <div class="mini-card">
+            <div class="mc-label">Первый шаг</div>
+            <div class="mc-val">P2000–P3000</div>
+            <div class="mc-sub">Мокрая шлифовка (если нужно)</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Этапы полировки</div>
+          <div class="layer-stack">
+            <div class="layer"
+              style="background:rgba(29,158,117,.06);border-color:rgba(29,158,117,.15)">
+              <div class="l-num">①</div>
+              <div class="l-info">
+                <div class="l-name">Мокрая шлифовка P2000 → P3000</div>
+                <div class="l-sub">Только если есть шагрень, пыль или потёки.
+                  Смочи водой + мыло.</div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(29,158,117,.09);border-color:rgba(29,158,117,.2)">
+              <div class="l-num">②</div>
+              <div class="l-info">
+                <div class="l-name">Режущая паста + поролоновый круг</div>
+                <div class="l-sub">Убираем риски от шлифовки. Farecla G3, Koch,
+                  3M Rubbing Compound.</div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(29,158,117,.12);border-color:rgba(29,158,117,.25)">
+              <div class="l-num">③</div>
+              <div class="l-info">
+                <div class="l-name">Финишная паста + мягкий/меховой круг</div>
+                <div class="l-sub">Доводочная паста. Koch Micro Cut, 3M
+                  Perfect-It. Зеркальный блеск.</div>
+              </div>
+            </div>
+            <div class="layer"
+              style="background:rgba(29,158,117,.15);border-color:rgba(29,158,117,.3)">
+              <div class="l-num">④</div>
+              <div class="l-info">
+                <div class="l-name">Воск / керамическое покрытие (опционально)
+                </div>
+                <div class="l-sub">Защита на 3–12 месяцев. Koch Ceramic,
+                  Meguiar's, Gyeon.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="alert success">
+          <div class="alert-icon">🎉</div>
+          <div><strong>Готово!</strong> Капот выглядит как с завода — или
+            лучше. Ты прошёл весь цикл покраски от металла до зеркала!</div>
+        </div>
+        <div style="margin-top:1rem">
+          <div class="card-title">Чеклист</div>
+          <ul class="checklist">
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Выдержано 24–48 часов после лака</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Убрана шагрень (P2000–P3000 мокрой)</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Режущая паста — риски убраны</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Финишная паста — зеркало достигнуто</div>
+            </li>
+            <li onclick="toggleCheck(this)">
+              <div class="cb"></div>
+              <div class="cb-text">Нанесена защита (воск / керамика)</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CALC -->
+      <div class="section" id="sec-calc">
+        <div class="page-header">
+          <div class="tag"
+            style="background:rgba(232,89,60,.12);color:var(--accent)">
+            Инструмент</div>
+          <h1>Калькулятор вязкости</h1>
+          <p>Настрой параметры пистолета и материала под конкретную задачу.</p>
+        </div>
+        <div class="calc-wrap">
+          <div class="range-group">
+            <label>Тип материала<span
+                id="mat-lbl">Грунт-наполнитель</span></label>
+            <select id="mat-type"
+              style="width:100%;padding:.5rem;background:var(--bg4);border:1px solid var(--border2);color:var(--text);border-radius:8px;font-family:var(--font-body);font-size:14px"
+              onchange="calcVisc()">
+              <option value="acid">Кислотный грунт</option>
+              <option value="epoxy">Эпоксидный грунт</option>
+              <option value="filler" selected>Грунт-наполнитель</option>
+              <option value="base">База (металлик/solid)</option>
+              <option value="clear">Лак 2K</option>
+            </select>
+          </div>
+          <div class="range-group">
+            <label>Температура в боксе<span id="temp-lbl">20°C</span></label>
+            <input type="range" min="5" max="35" value="20" id="temp-range"
+              oninput="calcVisc()">
+          </div>
+          <div class="range-group">
+            <label>Размер дюзы<span id="nozzle-lbl">1.4 мм</span></label>
+            <input type="range" min="10" max="20" value="14" id="nozzle-range"
+              oninput="calcVisc()">
+          </div>
+          <div class="calc-result">
+            <div class="cr-item">
+              <div class="cr-val" id="cr-visc">22</div>
+              <div class="cr-label">Вязкость (сек ДИН-4)</div>
+            </div>
+            <div class="cr-item">
+              <div class="cr-val" id="cr-press">2.0</div>
+              <div class="cr-label">Давление (бар)</div>
+            </div>
+            <div class="cr-item">
+              <div class="cr-val" id="cr-dist">18</div>
+              <div class="cr-label">Дистанция (см)</div>
+            </div>
+          </div>
+        </div>
+        <div class="alert tip" style="margin-top:1rem">
+          <div class="alert-icon">💡</div>
+          <div>При высокой температуре (25°C+) используй более медленный
+            разбавитель — материал успевает лечь ровнее. При низкой (ниже 15°C)
+            — быстрый отвердитель.</div>
+        </div>
+        <div class="card" style="margin-top:1.5rem">
+          <div class="card-title">Шпаргалка по дюзам</div>
+          <table class="prod-table">
+            <thead>
+              <tr>
+                <th>Дюза</th>
+                <th>Для чего</th>
+                <th>Рекомендация</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="brand">1.2–1.3 мм</td>
+                <td>Кислотный грунт, тонкие материалы</td>
+                <td>Лёгкие тонкие флейцы</td>
+              </tr>
+              <tr>
+                <td class="brand">1.3–1.4 мм</td>
+                <td>База, тонкие лаки</td>
+                <td>Основная дюза для цвета</td>
+              </tr>
+              <tr>
+                <td class="brand">1.4–1.5 мм</td>
+                <td>Лак 2K HS, средние грунты</td>
+                <td>Универсал для большинства работ</td>
+              </tr>
+              <tr>
+                <td class="brand">1.5–1.8 мм</td>
+                <td>Эпоксид, наполнитель, густые материалы</td>
+                <td>Шире факел, ниже давление</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- DEFECTS -->
+      <div class="section" id="sec-defects">
+        <div class="page-header">
+          <div class="tag"
+            style="background:rgba(232,89,60,.12);color:var(--accent)">Справка
+          </div>
+          <h1>Дефекты и решения</h1>
+          <p>Самые частые проблемы при покраске и как их исправить.</p>
+        </div>
+        <div class="card" style="border-color:rgba(232,89,60,.25)">
+          <div class="card-title">🐛 Потёки</div>
+          <div class="step-grid">
+            <div class="info-box">
+              <div class="ib-label">Причины</div>
+              <ul>
+                <li>Слишком много материала за раз</li>
+                <li>Пистолет слишком близко</li>
+                <li>Низкая вязкость (много разбавителя)</li>
+                <li>Слишком медленные движения</li>
+              </ul>
+            </div>
+            <div class="info-box">
+              <div class="ib-label">Как исправить</div>
+              <ul>
+                <li>Дать полностью высохнуть (24ч)</li>
+                <li>P1500–P2000 мокрой шлифовкой</li>
+                <li>Перекрыть ещё одним слоем</li>
+                <li>Полировка</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="border-color:rgba(240,168,48,.25)">
+          <div class="card-title">🟡 «Рыбий глаз» (кратеры)</div>
+          <div class="step-grid">
+            <div class="info-box">
+              <div class="ib-label">Причины</div>
+              <ul>
+                <li>Силикон или масло на поверхности</li>
+                <li>Вода в компрессоре (нет влагоотделителя)</li>
+                <li>Плохое обезжиривание</li>
+              </ul>
+            </div>
+            <div class="info-box">
+              <div class="ib-label">Как исправить</div>
+              <ul>
+                <li>Стереть материал пока сырой</li>
+                <li>Тщательно обезжирить антисиликоном</li>
+                <li>Проверить и слить конденсат из компрессора</li>
+                <li>Перекрасить</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="border-color:rgba(200,200,50,.2)">
+          <div class="card-title">🟠 Шагрень (апельсиновая корка)</div>
+          <div class="step-grid">
+            <div class="info-box">
+              <div class="ib-label">Причины</div>
+              <ul>
+                <li>Пистолет далеко от поверхности</li>
+                <li>Высокая вязкость материала</li>
+                <li>Высокое давление</li>
+                <li>Быстрый разбавитель + жара</li>
+              </ul>
+            </div>
+            <div class="info-box">
+              <div class="ib-label">Как исправить</div>
+              <ul>
+                <li>P2000 мокрой шлифовкой</li>
+                <li>P3000 + полировочная паста</li>
+                <li>При следующем нанесении — снизить вязкость</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="border-color:rgba(120,60,200,.25)">
+          <div class="card-title">⚫ Матовые пятна в лаке</div>
+          <div class="step-grid">
+            <div class="info-box">
+              <div class="ib-label">Причины</div>
+              <ul>
+                <li>База недостаточно высохла</li>
+                <li>Нанесли лак слишком рано</li>
+                <li>Разбавитель попал в лак</li>
+              </ul>
+            </div>
+            <div class="info-box">
+              <div class="ib-label">Как исправить</div>
+              <ul>
+                <li>Ждать 48ч полного высыхания</li>
+                <li>Нанести ещё 1 слой лака</li>
+                <li>При критичном случае — шлиф + повторный лак</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+  <script>
+    const sections = ['overview', 'materials', 'equipment', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 'calc', 'defects'];
+    const titles = {
+      overview: 'СЛОИ ПОКРАСКИ', materials: 'МАТЕРИАЛЫ', equipment: 'ОБОРУДОВАНИЕ',
+      s1: 'ШАГ 1: ДИАГНОСТИКА', s2: 'ШАГ 2: ЖЕСТЬ', s3: 'ШАГ 3: КИСЛОТНЫЙ ГРУНТ',
+      s4: 'ШАГ 4: ШПАТЛЁВКА', s5: 'ШАГ 5: ЭПОКСИД', s6: 'ШАГ 6: НАПОЛНИТЕЛЬ',
+      s7: 'ШАГ 7: БАЗА', s8: 'ШАГ 8: ЛАК', s9: 'ШАГ 9: ПОЛИРОВКА',
+      calc: 'КАЛЬКУЛЯТОР', defects: 'ДЕФЕКТЫ'
+    };
+    let cur = 'overview';
+
+    function navigate(id, el) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      const sec = document.getElementById('sec-' + id);
+      if (sec) sec.classList.add('active');
+      if (el) el.classList.add('active');
+      else {
+        const ni = document.querySelector(`[data-section="${id}"]`);
+        if (ni) ni.classList.add('active');
+      }
+      cur = id;
+      document.getElementById('topbar-title').textContent = titles[id] || id.toUpperCase();
+      document.getElementById('btn-prev').disabled = sections.indexOf(id) === 0;
+      document.getElementById('btn-next').disabled = sections.indexOf(id) === sections.length - 1;
+      if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
+    }
+
+    function nextStep() {
+      const i = sections.indexOf(cur);
+      if (i < sections.length - 1) navigate(sections[i + 1], null);
+    }
+    function prevStep() {
+      const i = sections.indexOf(cur);
+      if (i > 0) navigate(sections[i - 1], null);
+    }
+
+    function toggleCheck(li) {
+      li.classList.toggle('checked');
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const all = document.querySelectorAll('.checklist li').length;
+      const done = document.querySelectorAll('.checklist li.checked').length;
+      const pct = all > 0 ? Math.round(done / all * 100) : 0;
+      document.getElementById('prog-fill').style.width = pct + '%';
+      document.getElementById('prog-pct').textContent = pct + '%';
+    }
+
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    function switchTab(group, id) {
+      document.querySelectorAll(`#${group}-tabs .tab-btn`).forEach(b => b.classList.remove('active'));
+      document.querySelectorAll(`[id^="${group}-"]`).forEach(t => { if (t.classList.contains('tab-content')) t.classList.remove('active'); });
+      event.target.classList.add('active');
+      const tc = document.getElementById(`${group}-${id}`);
+      if (tc) tc.classList.add('active');
+    }
+
+    // VISCOSITY CALC
+    const viscData = {
+      acid: { visc: [12, 14], press: [1.5, 2.0], dist: 15 },
+      epoxy: { visc: [20, 25], press: [2.0, 2.5], dist: 20 },
+      filler: { visc: [22, 26], press: [2.0, 2.5], dist: 20 },
+      base: { visc: [15, 18], press: [1.5, 2.0], dist: 17 },
+      clear: { visc: [20, 25], press: [2.0, 2.5], dist: 18 },
+    };
+    const matNames = { acid: 'Кислотный грунт', epoxy: 'Эпоксидный грунт', filler: 'Грунт-наполнитель', base: 'База', clear: 'Лак 2K' };
+
+    function calcVisc() {
+      const mat = document.getElementById('mat-type').value;
+      const temp = parseInt(document.getElementById('temp-range').value);
+      const nozzle = parseInt(document.getElementById('nozzle-range').value) / 10;
+      document.getElementById('temp-lbl').textContent = temp + '°C';
+      document.getElementById('nozzle-lbl').textContent = nozzle.toFixed(1) + ' мм';
+      const d = viscData[mat];
+      const tempAdj = (20 - temp) * 0.3;
+      const visc = Math.round((d.visc[0] + d.visc[1]) / 2 + tempAdj);
+      const press = ((d.press[0] + d.press[1]) / 2).toFixed(1);
+      document.getElementById('cr-visc').textContent = Math.max(10, Math.min(35, visc));
+      document.getElementById('cr-press').textContent = press;
+      document.getElementById('cr-dist').textContent = d.dist;
+    }
+    calcVisc();
+
+    // Init
+    navigate('overview', document.querySelector('[data-section="overview"]'));
+    document.getElementById('btn-prev').disabled = true;
+  </script>
+</body>
+
+</html>
