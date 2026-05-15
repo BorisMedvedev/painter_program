@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Disallow: 
+
+# Sitemaps
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
+Request-rate: 30/60
+
+# Specific bots
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Yandexbot
+Allow: /
+Crawl-delay: 0
