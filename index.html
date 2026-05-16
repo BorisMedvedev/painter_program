@@ -4,37 +4,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="АвтоМаляр PRO v3 — профессиональное приложение-справочник для маляров. Технология окраски металла и пластика, расчет вязкости, выбор материалов, таблицы дефектов.">
-  <meta name="keywords"
-    content="приложение маляра, окраска автомобилей, технология покраски, вязкость краски, калькулятор маляра, дефекты краски, наждачная бумага, материалы для покраски">
+  <meta name="description" content="АвтоМаляр PRO v3 — профессиональное приложение-справочник для маляров. Технология окраски металла и пластика, расчет вязкости, выбор материалов, таблицы дефектов.">
+  <meta name="keywords" content="приложение маляра, окраска автомобилей, технология покраски, вязкость краски, калькулятор маляра, дефекты краски, наждачная бумага, материалы для покраски">
   <meta name="author" content="АвтоМаляр">
   <meta name="robots" content="index, follow">
   <meta name="language" content="Russian">
   <meta name="revisit-after" content="30 days">
-
+  
   <!-- Open Graph для соцсетей -->
   <meta property="og:title" content="АвтоМаляр PRO v3 — Приложение маляра">
-  <meta property="og:description"
-    content="Профессиональный справочник для маляров с технологией, материалами и калькулятором">
+  <meta property="og:description" content="Профессиональный справочник для маляров с технологией, материалами и калькулятором">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://yourdomain.com">
   <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
-
+  
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="АвтоМаляр PRO v3">
   <meta name="twitter:description" content="Приложение-справочник для маляров">
-
-  <title>АвтоМаляр PRO v3 — Приложение маляра | Справочник технологии окраски
-  </title>
+  
+  <title>АвтоМаляр PRO v3 — Приложение маляра | Справочник технологии окраски</title>
   <link rel="canonical" href="https://yourdomain.com">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Yandex.Metrika counter -->
   <script type="text/javascript">
@@ -48,8 +42,7 @@
     ym(109241275, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce: true, trackLinks: true });
   </script>
   <noscript>
-    <div><img src="https://mc.yandex.ru/watch/109241275"
-        style="position:absolute; left:-9999px;" alt="" /></div>
+    <div><img src="https://mc.yandex.ru/watch/109241275" style="position:absolute; left:-9999px;" alt="" /></div>
   </noscript>
   <!-- /Yandex.Metrika counter -->
 
@@ -348,13 +341,8 @@
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .page-header {
@@ -576,8 +564,7 @@
       color: var(--text2);
     }
 
-    select,
-    input[type="range"] {
+    select, input[type="range"] {
       padding: 0.5rem;
       background: var(--bg3);
       border: 1px solid var(--border);
@@ -623,6 +610,64 @@
       color: var(--text2);
     }
 
+    /* COMMENTS STYLES */
+    .comment {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+    }
+
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+
+    .comment-author {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .comment-type {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 0.25rem 0.5rem;
+      border-radius: 3px;
+      background: rgba(74, 158, 255, 0.2);
+      color: var(--accent3);
+    }
+
+    .comment-type.question {
+      background: rgba(245, 166, 35, 0.2);
+      color: var(--accent2);
+    }
+
+    .comment-type.suggestion {
+      background: rgba(46, 204, 113, 0.2);
+      color: var(--green);
+    }
+
+    .comment-type.error {
+      background: rgba(231, 76, 60, 0.2);
+      color: var(--red);
+    }
+
+    .comment-date {
+      font-size: 11px;
+      color: var(--text2);
+    }
+
+    .comment-text {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text2);
+      margin-top: 0.5rem;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       .sidebar {
@@ -649,9 +694,7 @@
         font-size: 24px;
       }
 
-      .grid-2,
-      .grid-3,
-      .grid-4 {
+      .grid-2, .grid-3, .grid-4 {
         grid-template-columns: 1fr;
       }
 
@@ -671,8 +714,7 @@
         font-size: 12px;
       }
 
-      .prod-table th,
-      .prod-table td {
+      .prod-table th, .prod-table td {
         padding: 0.5rem;
       }
     }
@@ -717,56 +759,55 @@
 
       <div class="sidebar-nav">
         <div class="nav-section">Основное</div>
-        <div class="nav-item active" data-section="home"
-          onclick="navigate('home', this)">
+        <div class="nav-item active" data-section="home" onclick="navigate('home', this)">
           <span>🏠</span>
           <span>Главная</span>
         </div>
 
         <div class="nav-section" style="margin-top: 1rem;">Материалы</div>
-        <div class="nav-item" data-section="sandpaper"
-          onclick="navigate('sandpaper', this)">
+        <div class="nav-item" data-section="sandpaper" onclick="navigate('sandpaper', this)">
           <span>📋</span>
           <span>Наждачная бумага</span>
         </div>
-        <div class="nav-item" data-section="materials"
-          onclick="navigate('materials', this)">
+        <div class="nav-item" data-section="cleaning" onclick="navigate('cleaning', this)">
+          <span>🧹</span>
+          <span>Обезжириватели</span>
+        </div>
+        <div class="nav-item" data-section="materials" onclick="navigate('materials', this)">
           <span>🧪</span>
           <span>Материалы</span>
         </div>
-        <div class="nav-item" data-section="remover"
-          onclick="navigate('remover', this)">
+        <div class="nav-item" data-section="remover" onclick="navigate('remover', this)">
           <span>♻️</span>
           <span>Смывватели</span>
         </div>
 
         <div class="nav-section" style="margin-top: 1rem;">Технология</div>
-        <div class="nav-item" data-section="metal-workflow"
-          onclick="navigate('metal-workflow', this)">
+        <div class="nav-item" data-section="metal-workflow" onclick="navigate('metal-workflow', this)">
           <span>⚙️</span>
           <span>Окраска метала</span>
         </div>
-        <div class="nav-item" data-section="plastic-workflow"
-          onclick="navigate('plastic-workflow', this)">
+        <div class="nav-item" data-section="plastic-workflow" onclick="navigate('plastic-workflow', this)">
           <span>🎯</span>
           <span>Окраска пластика</span>
         </div>
-        <div class="nav-item" data-section="defects"
-          onclick="navigate('defects', this)">
+        <div class="nav-item" data-section="defects" onclick="navigate('defects', this)">
           <span>⚠️</span>
           <span>Дефекты</span>
         </div>
 
         <div class="nav-section" style="margin-top: 1rem;">Инструменты</div>
-        <div class="nav-item" data-section="equipment"
-          onclick="navigate('equipment', this)">
+        <div class="nav-item" data-section="equipment" onclick="navigate('equipment', this)">
           <span>🔧</span>
           <span>Оборудование</span>
         </div>
-        <div class="nav-item" data-section="calc"
-          onclick="navigate('calc', this)">
+        <div class="nav-item" data-section="calc" onclick="navigate('calc', this)">
           <span>🧮</span>
           <span>Калькулятор</span>
+        </div>
+        <div class="nav-item" data-section="comments" onclick="navigate('comments', this)">
+          <span>💬</span>
+          <span>Комментарии</span>
         </div>
       </div>
 
@@ -776,8 +817,7 @@
           <span id="progress-val">0%</span>
         </div>
         <div class="progress-track">
-          <div class="progress-fill" id="progress-fill" style="width: 0%">
-          </div>
+          <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
         </div>
         <div class="theme-toggle" onclick="toggleTheme()">🌙 Светлая тема</div>
       </div>
@@ -790,10 +830,8 @@
           <h1 class="page-title" id="page-title">Главная</h1>
         </div>
         <div class="header-right">
-          <button class="btn" id="btn-prev" onclick="prevStep()">←
-            Назад</button>
-          <button class="btn primary" id="btn-next" onclick="nextStep()">Далее
-            →</button>
+          <button class="btn" id="btn-prev" onclick="prevStep()">← Назад</button>
+          <button class="btn primary" id="btn-next" onclick="nextStep()">Далее →</button>
         </div>
       </header>
 
@@ -802,57 +840,36 @@
         <div class="section active" id="sec-home">
           <div class="page-header">
             <h1 class="page-h1">🎨 АвтоМаляр PRO v3</h1>
-            <p class="page-desc">Полный справочник для профессионального
-              маляра. Технология окраски, подбор материалов, расчеты,
-              устранение дефектов.</p>
+            <p class="page-desc">Полный справочник для профессионального маляра. Технология окраски, подбор материалов, расчеты, устранение дефектов.</p>
           </div>
 
           <div class="grid-2">
             <div class="card">
               <div class="card-title">📋 Материалы</div>
-              <p
-                style="margin-bottom: 1rem; font-size: 13px; line-height: 1.6;">
-                Полная информация о наждачной бумаге, краске, растворителях и
-                смывателях. Выбор оптимальных материалов для каждого типа
-                работ.</p>
-              <button class="btn" onclick="navigate('materials', null)"
-                style="width: 100%;">Открыть</button>
+              <p style="margin-bottom: 1rem; font-size: 13px; line-height: 1.6;">Полная информация о наждачной бумаге, краске, растворителях и смывателях. Выбор оптимальных материалов для каждого типа работ.</p>
+              <button class="btn" onclick="navigate('materials', null)" style="width: 100%;">Открыть</button>
             </div>
             <div class="card">
               <div class="card-title">⚙️ Технология</div>
-              <p
-                style="margin-bottom: 1rem; font-size: 13px; line-height: 1.6;">
-                Пошаговая инструкция окраски металлических и пластиковых
-                деталей. Подготовка, грунтовка, база, лак.</p>
-              <button class="btn" onclick="navigate('metal-workflow', null)"
-                style="width: 100%;">Открыть</button>
+              <p style="margin-bottom: 1rem; font-size: 13px; line-height: 1.6;">Пошаговая инструкция окраски металлических и пластиковых деталей. Подготовка, грунтовка, база, лак.</p>
+              <button class="btn" onclick="navigate('metal-workflow', null)" style="width: 100%;">Открыть</button>
             </div>
             <div class="card">
               <div class="card-title">🧮 Калькулятор</div>
-              <p
-                style="margin-bottom: 1rem; font-size: 13px; line-height: 1.6;">
-                Расчет вязкости краски в зависимости от температуры и типа
-                материала. Подбор давления распыления.</p>
-              <button class="btn" onclick="navigate('calc', null)"
-                style="width: 100%;">Открыть</button>
+              <p style="margin-bottom: 1rem; font-size: 13px; line-height: 1.6;">Расчет вязкости краски в зависимости от температуры и типа материала. Подбор давления распыления.</p>
+              <button class="btn" onclick="navigate('calc', null)" style="width: 100%;">Открыть</button>
             </div>
             <div class="card">
               <div class="card-title">⚠️ Дефекты</div>
-              <p
-                style="margin-bottom: 1rem; font-size: 13px; line-height: 1.6;">
-                Справочник типичных дефектов при покраске. Причины
-                возникновения и методы устранения.</p>
-              <button class="btn" onclick="navigate('defects', null)"
-                style="width: 100%;">Открыть</button>
+              <p style="margin-bottom: 1rem; font-size: 13px; line-height: 1.6;">Справочник типичных дефектов при покраске. Причины возникновения и методы устранения.</p>
+              <button class="btn" onclick="navigate('defects', null)" style="width: 100%;">Открыть</button>
             </div>
           </div>
 
           <div class="alert">
             <div class="alert-icon">ℹ️</div>
             <div>
-              <strong>Рекомендация:</strong> Перед началом работ изучите
-              разделы "Технология" и "Материалы" для выбора оптимального
-              процесса.
+              <strong>Рекомендация:</strong> Перед началом работ изучите разделы "Технология" и "Материалы" для выбора оптимального процесса.
             </div>
           </div>
         </div>
@@ -862,8 +879,7 @@
           <div class="page-header">
             <div class="page-tag">Материалы</div>
             <h1 class="page-h1">Наждачная бумага</h1>
-            <p class="page-desc">Классификация абразивов, зернистость, область
-              применения и рекомендации выбора.</p>
+            <p class="page-desc">Классификация абразивов, зернистость, область применения и рекомендации выбора.</p>
           </div>
 
           <div class="card">
@@ -881,29 +897,25 @@
                 <tr>
                   <td><strong>Грубая</strong><br>40–80</td>
                   <td>P40–P80</td>
-                  <td>Удаление ржавчины, сильно повреждённых покрытий,
-                    строительные работы</td>
+                  <td>Удаление ржавчины, сильно повреждённых покрытий, строительные работы</td>
                   <td>Ткань, картон</td>
                 </tr>
                 <tr>
                   <td><strong>Средняя</strong><br>120–180</td>
                   <td>P120–P180</td>
-                  <td>Выравнивание поверхности перед грунтовкой, удаление
-                    следов полировки</td>
+                  <td>Выравнивание поверхности перед грунтовкой, удаление следов полировки</td>
                   <td>Бумага</td>
                 </tr>
                 <tr>
                   <td><strong>Тонкая</strong><br>220–400</td>
                   <td>P220–P400</td>
-                  <td>Финишная обработка перед окраской, шлифовка высохшей
-                    грунтовки</td>
+                  <td>Финишная обработка перед окраской, шлифовка высохшей грунтовки</td>
                   <td>Бумага, ткань</td>
                 </tr>
                 <tr>
                   <td><strong>Особо тонкая</strong><br>600–2000</td>
                   <td>P600–P2000</td>
-                  <td>Полировка лака, выравнивание подтёков, финишная обработка
-                  </td>
+                  <td>Полировка лака, выравнивание подтёков, финишная обработка</td>
                   <td>Водостойкая бумага</td>
                 </tr>
               </tbody>
@@ -914,12 +926,9 @@
             <div class="info-box">
               <div class="info-box-title">Типы основы</div>
               <ul>
-                <li><strong>Бумага:</strong> P40–P400, дешево, недолговечна
-                </li>
-                <li><strong>Ткань:</strong> P40–P120, прочная, используется
-                  влажная</li>
-                <li><strong>Водостойкая:</strong> P600+, для влажной шлифовки
-                </li>
+                <li><strong>Бумага:</strong> P40–P400, дешево, недолговечна</li>
+                <li><strong>Ткань:</strong> P40–P120, прочная, используется влажная</li>
+                <li><strong>Водостойкая:</strong> P600+, для влажной шлифовки</li>
               </ul>
             </div>
             <div class="info-box">
@@ -938,14 +947,12 @@
           <div class="page-header">
             <div class="page-tag">Технология</div>
             <h1 class="page-h1">Технология окраски метала</h1>
-            <p class="page-desc">Пошаговая инструкция подготовки и окраски
-              металлических поверхностей.</p>
+            <p class="page-desc">Пошаговая инструкция подготовки и окраски металлических поверхностей.</p>
           </div>
 
           <div class="card">
             <div class="card-title">Этап 1: Подготовка</div>
-            <div
-              style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div class="info-box">
                 <div class="info-box-title">Материалы</div>
                 <ul>
@@ -995,11 +1002,9 @@
               <div class="info-box">
                 <div class="info-box-title">Тип базы</div>
                 <ul>
-                  <li><strong>Сплошная:</strong> 1–2 слоя, гладкое покрытие
-                  </li>
+                  <li><strong>Сплошная:</strong> 1–2 слоя, гладкое покрытие</li>
                   <li><strong>Металлик:</strong> 2–3 слоя, перекрытие 50%</li>
-                  <li><strong>Перламутр:</strong> 3–4 слоя, сложное нанесение
-                  </li>
+                  <li><strong>Перламутр:</strong> 3–4 слоя, сложное нанесение</li>
                 </ul>
               </div>
               <div class="info-box">
@@ -1038,9 +1043,7 @@
           <div class="alert danger">
             <div class="alert-icon">⚠️</div>
             <div>
-              <strong>Критично:</strong> Работай в проветриваемом помещении с
-              маской A2P3. При работе с эпоксидными материалами используй
-              перчатки и защиту глаз.
+              <strong>Критично:</strong> Работай в проветриваемом помещении с маской A2P3. При работе с эпоксидными материалами используй перчатки и защиту глаз.
             </div>
           </div>
         </div>
@@ -1050,16 +1053,13 @@
           <div class="page-header">
             <div class="page-tag">Технология</div>
             <h1 class="page-h1">Технология окраски пластика</h1>
-            <p class="page-desc">Специфика работы с пластмассовыми деталями,
-              использование активаторов и правильная подготовка.</p>
+            <p class="page-desc">Специфика работы с пластмассовыми деталями, использование активаторов и правильная подготовка.</p>
           </div>
 
           <div class="alert">
             <div class="alert-icon">ℹ️</div>
             <div>
-              <strong>Внимание:</strong> Пластик требует особого подхода.
-              Неправильная подготовка приводит к отслоению краски и
-              растрескиванию.
+              <strong>Внимание:</strong> Пластик требует особого подхода. Неправильная подготовка приводит к отслоению краски и растрескиванию.
             </div>
           </div>
 
@@ -1093,8 +1093,7 @@
                 <ul>
                   <li><strong>Поли-уретановый:</strong> универсальный</li>
                   <li><strong>Акриловый + активатор:</strong> для пластика</li>
-                  <li><strong>С пластификатором:</strong> для гибкого пластика
-                  </li>
+                  <li><strong>С пластификатором:</strong> для гибкого пластика</li>
                 </ul>
               </div>
               <div class="info-box">
@@ -1155,9 +1154,7 @@
           <div class="alert danger">
             <div class="alert-icon">☠️</div>
             <div>
-              <strong>Опасно:</strong> При нанесении эпоксидной краски на
-              пластик происходит его растрескивание из-за химической
-              несовместимости.
+              <strong>Опасно:</strong> При нанесении эпоксидной краски на пластик происходит его растрескивание из-за химической несовместимости.
             </div>
           </div>
         </div>
@@ -1167,19 +1164,14 @@
           <div class="page-header">
             <div class="page-tag">Справочник</div>
             <h1 class="page-h1">Материалы для окраски</h1>
-            <p class="page-desc">Классификация красок, лаков, грунтов,
-              растворителей и вспомогательных материалов.</p>
+            <p class="page-desc">Классификация красок, лаков, грунтов, растворителей и вспомогательных материалов.</p>
           </div>
 
           <div class="tabs" id="materials-tabs">
-            <button class="tab-btn active"
-              onclick="switchTab('materials', 'primers')">Грунты</button>
-            <button class="tab-btn"
-              onclick="switchTab('materials', 'paints')">Краски</button>
-            <button class="tab-btn"
-              onclick="switchTab('materials', 'clears')">Лаки</button>
-            <button class="tab-btn"
-              onclick="switchTab('materials', 'solvents')">Разбавители</button>
+            <button class="tab-btn active" onclick="switchTab('materials', 'primers')">Грунты</button>
+            <button class="tab-btn" onclick="switchTab('materials', 'paints')">Краски</button>
+            <button class="tab-btn" onclick="switchTab('materials', 'clears')">Лаки</button>
+            <button class="tab-btn" onclick="switchTab('materials', 'solvents')">Разбавители</button>
           </div>
 
           <div id="materials-primers" class="tab-content active">
@@ -1187,8 +1179,7 @@
               <div class="info-box">
                 <div class="info-box-title">Эпоксидный грунт</div>
                 <ul>
-                  <li><strong>Применение:</strong> Металл, защита от ржавчины
-                  </li>
+                  <li><strong>Применение:</strong> Металл, защита от ржавчины</li>
                   <li><strong>Адгезия:</strong> Отличная (10/10)</li>
                   <li><strong>Толщина:</strong> 80–120 мкм</li>
                   <li><strong>Высыхание:</strong> 2–4 ч</li>
@@ -1253,8 +1244,7 @@
               <div class="info-box">
                 <div class="info-box-title">Перламутр</div>
                 <ul>
-                  <li><strong>Состав:</strong> Акрил + перламутровый пигмент
-                  </li>
+                  <li><strong>Состав:</strong> Акрил + перламутровый пигмент</li>
                   <li><strong>Вязкость:</strong> 15–18 с</li>
                   <li><strong>Слоёв:</strong> 3–4</li>
                   <li><strong>Сложность:</strong> Высокая</li>
@@ -1264,8 +1254,7 @@
               <div class="info-box">
                 <div class="info-box-title">Мат/Бархат</div>
                 <ul>
-                  <li><strong>Состав:</strong> Акрил со специальным агентом
-                  </li>
+                  <li><strong>Состав:</strong> Акрил со специальным агентом</li>
                   <li><strong>Вязкость:</strong> 16–19 с</li>
                   <li><strong>Слоёв:</strong> 2–3</li>
                   <li><strong>Требует:</strong> Специальной подготовки</li>
@@ -1367,8 +1356,7 @@
           <div class="page-header">
             <div class="page-tag">Инструменты</div>
             <h1 class="page-h1">Оборудование маляра</h1>
-            <p class="page-desc">Полный список необходимого оборудования,
-              рекомендуемые модели и параметры.</p>
+            <p class="page-desc">Полный список необходимого оборудования, рекомендуемые модели и параметры.</p>
           </div>
 
           <div class="card">
@@ -1394,8 +1382,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <div class="prod-brand">Стандартный (Среднее давление)
-                    </div>
+                    <div class="prod-brand">Стандартный (Среднее давление)</div>
                     <div class="prod-name">3.0–5.0 л/мин</div>
                   </td>
                   <td>Оптимальное качество/скорость, стандартный выбор</td>
@@ -1419,16 +1406,13 @@
             <div class="card">
               <div class="card-title">Защита и одежда</div>
               <ul style="list-style: none; padding: 0;">
-                <li
-                  style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
                   <strong>Маска A2P3:</strong> Защита от паров (обязательно!)
                 </li>
-                <li
-                  style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
                   <strong>Перчатки нитриловые:</strong> Толстые, многослойные
                 </li>
-                <li
-                  style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
                   <strong>Защита глаз:</strong> Очки закрытого типа
                 </li>
                 <li style="padding: 0.5rem 0;">
@@ -1439,16 +1423,13 @@
             <div class="card">
               <div class="card-title">Вспомогательный инструмент</div>
               <ul style="list-style: none; padding: 0;">
-                <li
-                  style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
                   <strong>Вискозиметр:</strong> Для замера вязкости
                 </li>
-                <li
-                  style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
                   <strong>Микрометр:</strong> Контроль толщины слоя
                 </li>
-                <li
-                  style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);">
                   <strong>Шланги:</strong> Качественные, без утечек
                 </li>
                 <li style="padding: 0.5rem 0;">
@@ -1464,14 +1445,12 @@
           <div class="page-header">
             <div class="page-tag">Справочник</div>
             <h1 class="page-h1">Дефекты при окраске</h1>
-            <p class="page-desc">Классификация дефектов, причины возникновения
-              и методы исправления.</p>
+            <p class="page-desc">Классификация дефектов, причины возникновения и методы исправления.</p>
           </div>
 
           <div class="card" style="margin-bottom: 1rem;">
             <div class="card-title">Потёки (Сеги, Брызги)</div>
-            <div
-              style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div class="info-box">
                 <div class="info-box-title">Причины</div>
                 <ul>
@@ -1494,8 +1473,7 @@
 
           <div class="card" style="margin-bottom: 1rem;">
             <div class="card-title">Шагрень (Апельсиновая кожа)</div>
-            <div
-              style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div class="info-box">
                 <div class="info-box-title">Причины</div>
                 <ul>
@@ -1518,8 +1496,7 @@
 
           <div class="card" style="margin-bottom: 1rem;">
             <div class="card-title">Матовость лака (Недостаток блеска)</div>
-            <div
-              style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div class="info-box">
                 <div class="info-box-title">Причины</div>
                 <ul>
@@ -1541,8 +1518,7 @@
 
           <div class="card" style="margin-bottom: 1rem;">
             <div class="card-title">Липкость (Плохое высыхание)</div>
-            <div
-              style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div class="info-box">
                 <div class="info-box-title">Причины</div>
                 <ul>
@@ -1564,8 +1540,7 @@
 
           <div class="card" style="margin-bottom: 1rem;">
             <div class="card-title">Расслоение (Отслоение краски)</div>
-            <div
-              style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div class="info-box">
                 <div class="info-box-title">Причины</div>
                 <ul>
@@ -1588,8 +1563,7 @@
 
           <div class="card">
             <div class="card-title">Облёск (Перелёт)</div>
-            <div
-              style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div class="info-box">
                 <div class="info-box-title">Причины</div>
                 <ul>
@@ -1615,8 +1589,7 @@
           <div class="page-header">
             <div class="page-tag">Инструмент</div>
             <h1 class="page-h1">Калькулятор вязкости</h1>
-            <p class="page-desc">Расчёт оптимальной вязкости краски в
-              зависимости от температуры и типа материала.</p>
+            <p class="page-desc">Расчёт оптимальной вязкости краски в зависимости от температуры и типа материала.</p>
           </div>
 
           <div class="card">
@@ -1633,16 +1606,12 @@
                 </select>
               </div>
               <div class="calc-input">
-                <label for="temp-slider">Температура <span
-                    id="temp-display">20°C</span></label>
-                <input type="range" id="temp-slider" min="0" max="40"
-                  value="20" onchange="updateCalc()" style="width: 100%;">
+                <label for="temp-slider">Температура <span id="temp-display">20°C</span></label>
+                <input type="range" id="temp-slider" min="0" max="40" value="20" onchange="updateCalc()" style="width: 100%;">
               </div>
               <div class="calc-input">
-                <label for="nozzle-slider">Диаметр сопла <span
-                    id="nozzle-display">1.4 мм</span></label>
-                <input type="range" id="nozzle-slider" min="10" max="25"
-                  value="14" onchange="updateCalc()" style="width: 100%;">
+                <label for="nozzle-slider">Диаметр сопла <span id="nozzle-display">1.4 мм</span></label>
+                <input type="range" id="nozzle-slider" min="10" max="25" value="14" onchange="updateCalc()" style="width: 100%;">
               </div>
             </div>
           </div>
@@ -1651,23 +1620,17 @@
             <div class="calc-result">
               <div class="calc-result-label">Вязкость</div>
               <div class="calc-result-value" id="visc-val">15</div>
-              <div
-                style="font-size: 11px; color: var(--text2); margin-top: 0.5rem;">
-                сек по В-4</div>
+              <div style="font-size: 11px; color: var(--text2); margin-top: 0.5rem;">сек по В-4</div>
             </div>
             <div class="calc-result">
               <div class="calc-result-label">Давление</div>
               <div class="calc-result-value" id="press-val">2.0</div>
-              <div
-                style="font-size: 11px; color: var(--text2); margin-top: 0.5rem;">
-                бар</div>
+              <div style="font-size: 11px; color: var(--text2); margin-top: 0.5rem;">бар</div>
             </div>
             <div class="calc-result">
               <div class="calc-result-label">Расстояние</div>
               <div class="calc-result-value" id="dist-val">17</div>
-              <div
-                style="font-size: 11px; color: var(--text2); margin-top: 0.5rem;">
-                см</div>
+              <div style="font-size: 11px; color: var(--text2); margin-top: 0.5rem;">см</div>
             </div>
           </div>
 
@@ -1676,16 +1639,11 @@
             <div class="info-box">
               <div class="info-box-title">Пошаговый процесс</div>
               <ul>
-                <li><strong>Шаг 1:</strong> Выбери тип материала (грунт,
-                  краска, лак)</li>
-                <li><strong>Шаг 2:</strong> Установи актуальную температуру
-                  воздуха в мастерской</li>
-                <li><strong>Шаг 3:</strong> Укажи диаметр сопла твоего
-                  краскопульта</li>
-                <li><strong>Шаг 4:</strong> Получи оптимальные значения
-                  вязкости, давления и расстояния</li>
-                <li><strong>Шаг 5:</strong> Отрегулируй краскопульт по
-                  полученным параметрам</li>
+                <li><strong>Шаг 1:</strong> Выбери тип материала (грунт, краска, лак)</li>
+                <li><strong>Шаг 2:</strong> Установи актуальную температуру воздуха в мастерской</li>
+                <li><strong>Шаг 3:</strong> Укажи диаметр сопла твоего краскопульта</li>
+                <li><strong>Шаг 4:</strong> Получи оптимальные значения вязкости, давления и расстояния</li>
+                <li><strong>Шаг 5:</strong> Отрегулируй краскопульт по полученным параметрам</li>
               </ul>
             </div>
           </div>
@@ -1693,9 +1651,456 @@
           <div class="alert">
             <div class="alert-icon">ℹ️</div>
             <div>
-              <strong>Совет:</strong> Все значения рассчитаны для вискозиметра
-              В-4 (воронка). Если ты используешь другой прибор, переведи
-              значение по таблице.
+              <strong>Совет:</strong> Все значения рассчитаны для вискозиметра В-4 (воронка). Если ты используешь другой прибор, переведи значение по таблице.
+            </div>
+          </div>
+        </div>
+
+        <!-- CLEANING -->
+        <div class="section" id="sec-cleaning">
+          <div class="page-header">
+            <div class="page-tag">Материалы</div>
+            <h1 class="page-h1">Протирочные жидкости и обезжириватели</h1>
+            <p class="page-desc">Полное руководство по очистке и обезжириванию поверхностей перед окраской. Выбор материалов, техника применения, правила безопасности.</p>
+          </div>
+
+          <div class="alert">
+            <div class="alert-icon">ℹ️</div>
+            <div>
+              <strong>Важно:</strong> Качество обезжиривания — залог долговечности покрытия. Пропуск этого этапа приводит к отслоению краски через 3-6 месяцев.
+            </div>
+          </div>
+
+          <!-- Cleaning Fluids -->
+          <div class="card">
+            <div class="card-title">🧪 Виды обезжиривателей</div>
+            <div class="grid-2">
+              <div class="info-box">
+                <div class="info-box-title">Спиртовые (Этанол)</div>
+                <ul>
+                  <li><strong>Состав:</strong> 70-90% этиловый спирт</li>
+                  <li><strong>Применение:</strong> Универсальный</li>
+                  <li><strong>Эффективность:</strong> 8/10</li>
+                  <li><strong>Запах:</strong> Сильный</li>
+                  <li><strong>Безопасность:</strong> Хорошая</li>
+                  <li><strong>Цена:</strong> Низкая (50-150 ₽/л)</li>
+                  <li><strong>Где купить:</strong> Любая аптека</li>
+                </ul>
+              </div>
+
+              <div class="info-box">
+                <div class="info-box-title">Уайт-спирит</div>
+                <ul>
+                  <li><strong>Состав:</strong> Нефтяной дистиллят</li>
+                  <li><strong>Применение:</strong> Для масел и жиров</li>
+                  <li><strong>Эффективность:</strong> 9/10</li>
+                  <li><strong>Запах:</strong> Резкий</li>
+                  <li><strong>Безопасность:</strong> Хорошая</li>
+                  <li><strong>Цена:</strong> Средняя (100-250 ₽/л)</li>
+                  <li><strong>Где купить:</strong> Строймагазины</li>
+                </ul>
+              </div>
+
+              <div class="info-box">
+                <div class="info-box-title">Ацетон</div>
+                <ul>
+                  <li><strong>Состав:</strong> 100% ацетон</li>
+                  <li><strong>Применение:</strong> Для смол и лаков</li>
+                  <li><strong>Эффективность:</strong> 10/10</li>
+                  <li><strong>Запах:</strong> Очень резкий</li>
+                  <li><strong>Безопасность:</strong> Требует маски</li>
+                  <li><strong>Цена:</strong> Средняя (150-300 ₽/л)</li>
+                  <li><strong>Где купить:</strong> Хозмагазины</li>
+                </ul>
+              </div>
+
+              <div class="info-box">
+                <div class="info-box-title">Специальные составы</div>
+                <ul>
+                  <li><strong>Состав:</strong> Комбинированный</li>
+                  <li><strong>Применение:</strong> Универсальный</li>
+                  <li><strong>Эффективность:</strong> 9/10</li>
+                  <li><strong>Запах:</strong> Слабый</li>
+                  <li><strong>Безопасность:</strong> Максимальная</li>
+                  <li><strong>Цена:</strong> Высокая (300-800 ₽/л)</li>
+                  <li><strong>Где купить:</strong> Специализированные</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comparison Table -->
+          <div class="card">
+            <div class="card-title">📊 Сравнение обезжиривателей</div>
+            <table class="prod-table">
+              <thead>
+                <tr>
+                  <th>Материал</th>
+                  <th>Спирт</th>
+                  <th>Уайт-спирит</th>
+                  <th>Ацетон</th>
+                  <th>Специальный</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Для металла</strong></td>
+                  <td>✅ Да</td>
+                  <td>✅ Да</td>
+                  <td>✅ Да</td>
+                  <td>✅ Да</td>
+                </tr>
+                <tr>
+                  <td><strong>Для пластика</strong></td>
+                  <td>✅ Да</td>
+                  <td>⚠️ С осторожностью</td>
+                  <td>❌ Нет!</td>
+                  <td>✅ Да</td>
+                </tr>
+                <tr>
+                  <td><strong>Для резины</strong></td>
+                  <td>✅ Да</td>
+                  <td>✅ Да</td>
+                  <td>❌ Нет!</td>
+                  <td>✅ Да</td>
+                </tr>
+                <tr>
+                  <td><strong>Быстросохнущий</strong></td>
+                  <td>✅ Да (30 сек)</td>
+                  <td>⚠️ Средне (2 мин)</td>
+                  <td>✅ Очень (10 сек)</td>
+                  <td>✅ Да (1 мин)</td>
+                </tr>
+                <tr>
+                  <td><strong>Безопасность</strong></td>
+                  <td>✅ Хорошая</td>
+                  <td>✅ Хорошая</td>
+                  <td>⚠️ Требует маски</td>
+                  <td>✅ Отличная</td>
+                </tr>
+                <tr>
+                  <td><strong>Цена</strong></td>
+                  <td>💰 Дешево</td>
+                  <td>💰💰 Средне</td>
+                  <td>💰💰 Средне</td>
+                  <td>💰💰💰 Дорого</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Cleaning Materials -->
+          <div class="card">
+            <div class="card-title">🧹 Материалы для протирания</div>
+            <div class="grid-2">
+              <div class="info-box">
+                <div class="info-box-title">Салфетки безворсовые (Липкие)</div>
+                <ul>
+                  <li><strong>Материал:</strong> Нетканый полипропилен</li>
+                  <li><strong>Тип:</strong> Одноразовые липкие</li>
+                  <li><strong>Применение:</strong> Перед окраской (ОБЯЗАТЕЛЬНО!)</li>
+                  <li><strong>Размер:</strong> 20x30 см, 30x40 см</li>
+                  <li><strong>Цена:</strong> 200-500 ₽ за пачку (50 шт)</li>
+                  <li><strong>Бренды:</strong> 3M, MIRKA, Kovax</li>
+                </ul>
+              </div>
+
+              <div class="info-box">
+                <div class="info-box-title">Микрофибра (мягкая)</div>
+                <ul>
+                  <li><strong>Материал:</strong> Синтетическая микрофибра</li>
+                  <li><strong>Тип:</strong> Многоразовая, мягкая</li>
+                  <li><strong>Применение:</strong> Общая очистка</li>
+                  <li><strong>Размер:</strong> 30x30 см, 40x40 см</li>
+                  <li><strong>Цена:</strong> 50-200 ₽ за штуку</li>
+                  <li><strong>Плюс:</strong> Не оставляет ворса</li>
+                </ul>
+              </div>
+
+              <div class="info-box">
+                <div class="info-box-title">Х/б ветошь (хлопок)</div>
+                <ul>
+                  <li><strong>Материал:</strong> Чистый хлопок</li>
+                  <li><strong>Тип:</strong> Многоразовая, впитывающая</li>
+                  <li><strong>Применение:</strong> Влажная очистка</li>
+                  <li><strong>Плюс:</strong> Максимально впитывает</li>
+                  <li><strong>Минус:</strong> Может оставить ворс</li>
+                  <li><strong>Цена:</strong> 20-50 ₽ за штуку</li>
+                </ul>
+              </div>
+
+              <div class="info-box">
+                <div class="info-box-title">Льняные салфетки</div>
+                <ul>
+                  <li><strong>Материал:</strong> Натуральное льняное волокно</li>
+                  <li><strong>Тип:</strong> Многоразовые, качественные</li>
+                  <li><strong>Применение:</strong> Финальная очистка</li>
+                  <li><strong>Плюс:</strong> Минимум ворса</li>
+                  <li><strong>Минус:</strong> Дороже хлопка</li>
+                  <li><strong>Цена:</strong> 100-300 ₽ за штуку</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step by Step -->
+          <div class="card">
+            <div class="card-title">📋 Технология обезжиривания (Пошагово)</div>
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+              <div class="info-box">
+                <div class="info-box-title">Этап 1: Подготовка (2-3 минуты)</div>
+                <ul>
+                  <li><strong>Время:</strong> 2-3 минуты перед окраской</li>
+                  <li><strong>Материалы:</strong> Уайт-спирит, салфетки микрофибра</li>
+                  <li><strong>Инструмент:</strong> Салфетка (без ворса)</li>
+                  <li><strong>Процесс:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                      <li>Смочи салфетку уайт-спиритом</li>
+                      <li>Протри поверхность в одном направлении</li>
+                      <li>НЕ надави, движения мягкие</li>
+                      <li>Повтори 2-3 раза чистой салфеткой</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="info-box">
+                <div class="info-box-title">Этап 2: Глубокая очистка (5-10 минут)</div>
+                <ul>
+                  <li><strong>Когда:</strong> После шлифовки, перед грунтом</li>
+                  <li><strong>Материалы:</strong> Спирт или ацетон</li>
+                  <li><strong>Инструмент:</strong> Липкие салфетки 3M</li>
+                  <li><strong>Процесс:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                      <li>Смочи липкую салфетку спиртом</li>
+                      <li>Протри поверхность (движение вверх-вниз)</li>
+                      <li>Замени салфетку каждые 10 см²</li>
+                      <li>Повтори 3-4 раза новой салфеткой</li>
+                      <li>Подожди 5-10 минут полного высыхания</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="info-box">
+                <div class="info-box-title">Этап 3: Финальная очистка (1-2 минуты)</div>
+                <ul>
+                  <li><strong>Когда:</strong> За 5 минут до окраски</li>
+                  <li><strong>Материалы:</strong> Спирт, липкие салфетки</li>
+                  <li><strong>Инструмент:</strong> Одноразовые салфетки</li>
+                  <li><strong>Процесс:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                      <li>Быстрая протирка липкой салфеткой</li>
+                      <li>За 5 минут до начала окраски</li>
+                      <li>НЕЛЬЗЯ трогать пальцами после этого!</li>
+                      <li>Изолируй поверхность от пыли</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- When to Use What -->
+          <div class="card">
+            <div class="card-title">🎯 Когда что использовать</div>
+            <table class="prod-table">
+              <thead>
+                <tr>
+                  <th>Ситуация</th>
+                  <th>Обезжириватель</th>
+                  <th>Салфетка</th>
+                  <th>Время</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>После шлифовки пыль</td>
+                  <td>Спирт 70%</td>
+                  <td>Микрофибра</td>
+                  <td>3-5 мин</td>
+                </tr>
+                <tr>
+                  <td>Жирное загрязнение</td>
+                  <td>Уайт-спирит</td>
+                  <td>Микрофибра</td>
+                  <td>5-10 мин</td>
+                </tr>
+                <tr>
+                  <td>Масло, смазка</td>
+                  <td>Уайт-спирит</td>
+                  <td>Х/б ветошь</td>
+                  <td>10-15 мин</td>
+                </tr>
+                <tr>
+                  <td>Старый лак, смола</td>
+                  <td>Ацетон</td>
+                  <td>Липкие салфетки</td>
+                  <td>5-10 мин</td>
+                </tr>
+                <tr>
+                  <td>Пластик (осторожно)</td>
+                  <td>Спирт 70%</td>
+                  <td>Мягкая микрофибра</td>
+                  <td>2-5 мин</td>
+                </tr>
+                <tr>
+                  <td>Перед окраской (финал)</td>
+                  <td>Спирт</td>
+                  <td>Липкие 3M</td>
+                  <td>1-2 мин</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Safety & Tips -->
+          <div class="card">
+            <div class="card-title">⚠️ Правила безопасности</div>
+            <div class="grid-2">
+              <div class="info-box">
+                <div class="info-box-title">Обязательно</div>
+                <ul>
+                  <li>✅ Используй маску A2 при ацетоне</li>
+                  <li>✅ Работай в проветриваемом помещении</li>
+                  <li>✅ Надень перчатки (нитриловые)</li>
+                  <li>✅ Защита для глаз очки</li>
+                  <li>✅ Фартук или спец одежда</li>
+                </ul>
+              </div>
+
+              <div class="info-box">
+                <div class="info-box-title">Запрещено</div>
+                <ul>
+                  <li>❌ Работать без вентиляции</li>
+                  <li>❌ Ацетон на пластик (растворит)</li>
+                  <li>❌ Трогать поверхность после очистки</li>
+                  <li>❌ Смешивать разные обезжириватели</li>
+                  <li>❌ Курить рядом со спиртом</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Brands -->
+          <div class="card">
+            <div class="card-title">🏢 Популярные бренды</div>
+            <table class="prod-table">
+              <thead>
+                <tr>
+                  <th>Бренд</th>
+                  <th>Тип</th>
+                  <th>Страна</th>
+                  <th>Цена</th>
+                  <th>Рейтинг</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="prod-brand">MIRKA</div><div class="prod-name">Cleaning Wipes</div></td>
+                  <td>Липкие салфетки</td>
+                  <td>Финляндия</td>
+                  <td class="prod-price">400-600 ₽</td>
+                  <td>⭐⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                  <td><div class="prod-brand">3M</div><div class="prod-name">Scotch-Brite</div></td>
+                  <td>Салфетки</td>
+                  <td>США</td>
+                  <td class="prod-price">300-500 ₽</td>
+                  <td>⭐⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                  <td><div class="prod-brand">SANDING BLOCK</div><div class="prod-name">Degreaser</div></td>
+                  <td>Обезжириватель</td>
+                  <td>Россия</td>
+                  <td class="prod-price">150-300 ₽/л</td>
+                  <td>⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                  <td><div class="prod-brand">TIKKURILA</div><div class="prod-name">Degreaser</div></td>
+                  <td>Обезжириватель</td>
+                  <td>Финляндия</td>
+                  <td class="prod-price">250-450 ₽/л</td>
+                  <td>⭐⭐⭐⭐⭐</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="alert danger">
+            <div class="alert-icon">☠️</div>
+            <div>
+              <strong>Критично:</strong> Пропуск обезжиривания или использование ацетона на пластик — главные причины отслоения краски. Не экономь на этом этапе!
+            </div>
+          </div>
+        </div>
+
+        <!-- COMMENTS -->
+        <div class="section" id="sec-comments">
+          <div class="page-header">
+            <div class="page-tag">Сообщество</div>
+            <h1 class="page-h1">Комментарии и отзывы</h1>
+            <p class="page-desc">Поделись своим опытом, задай вопрос или предложи улучшение.</p>
+          </div>
+
+          <!-- Comments Form -->
+          <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-title">✍️ Написать комментарий</div>
+            
+            <form id="comment-form" style="display: flex; flex-direction: column; gap: 1rem;">
+              <div>
+                <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 0.5rem; color: var(--text2);">Ваше имя</label>
+                <input type="text" id="comment-name" placeholder="Иван Маляров" required style="width: 100%; padding: 0.75rem; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px;">
+              </div>
+
+              <div>
+                <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 0.5rem; color: var(--text2);">Email (не будет опубликован)</label>
+                <input type="email" id="comment-email" placeholder="ivan@example.com" required style="width: 100%; padding: 0.75rem; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px;">
+              </div>
+
+              <div>
+                <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 0.5rem; color: var(--text2);">Тип сообщения</label>
+                <select id="comment-type" style="width: 100%; padding: 0.75rem; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px;">
+                  <option value="comment">💬 Комментарий</option>
+                  <option value="question">❓ Вопрос</option>
+                  <option value="suggestion">💡 Предложение</option>
+                  <option value="error">⚠️ Ошибка в информации</option>
+                </select>
+              </div>
+
+              <div>
+                <label style="display: block; font-size: 12px; font-weight: 600; margin-bottom: 0.5rem; color: var(--text2);">Сообщение</label>
+                <textarea id="comment-text" placeholder="Напиши сообщение..." rows="5" required style="width: 100%; padding: 0.75rem; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; resize: vertical;"></textarea>
+              </div>
+
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <input type="checkbox" id="comment-agree" required style="cursor: pointer;">
+                <label for="comment-agree" style="font-size: 12px; color: var(--text2); cursor: pointer;">Я согласен с обработкой моих данных</label>
+              </div>
+
+              <button type="submit" class="btn primary" style="width: 100%; padding: 0.75rem;">
+                📤 Отправить
+              </button>
+              
+              <div id="comment-status" style="display: none; padding: 1rem; border-radius: var(--radius); text-align: center; font-size: 13px; font-weight: 600;"></div>
+            </form>
+          </div>
+
+          <!-- Comments Section -->
+          <div class="card">
+            <div class="card-title">💬 Опубликованные комментарии</div>
+            <div id="comments-list" style="display: flex; flex-direction: column; gap: 1.5rem;">
+              <div style="text-align: center; color: var(--text2); padding: 2rem;">
+                <p style="font-size: 14px;">Комментарии загружаются...</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert">
+            <div class="alert-icon">ℹ️</div>
+            <div>
+              <strong>Модерация:</strong> Все комментарии проходят проверку перед публикацией. Спам и оскорбления будут удалены.
             </div>
           </div>
         </div>
@@ -1705,8 +2110,7 @@
           <div class="page-header">
             <div class="page-tag danger">Специальный материал</div>
             <h1 class="page-h1">Смывватели краски</h1>
-            <p class="page-desc">Химические средства для удаления ЛКП с
-              пластика и других поверхностей.</p>
+            <p class="page-desc">Химические средства для удаления ЛКП с пластика и других поверхностей.</p>
           </div>
 
           <div class="grid-2" style="margin-bottom: 1.5rem;">
@@ -1818,9 +2222,7 @@
           <div class="alert danger">
             <div class="alert-icon">☠️</div>
             <div>
-              <strong>Смывватели токсичны!</strong> Всегда используй маску
-              A2P3, перчатки нитриловые (толстые), на улице или с вентиляцией.
-              Не допускай попадания в глаза.
+              <strong>Смывватели токсичны!</strong> Всегда используй маску A2P3, перчатки нитриловые (толстые), на улице или с вентиляцией. Не допускай попадания в глаза.
             </div>
           </div>
         </div>
@@ -1828,24 +2230,25 @@
       </div>
 
       <footer class="footer">
-        <p>© 2026 АвтоМаляр PRO v3. Справочник для профессионалов. <br>Все
-          материалы предоставляются в информационных целях.</p>
+        <p>© 2025 АвтоМаляр PRO v3. Справочник для профессионалов. <br>Все материалы предоставляются в информационных целях.</p>
       </footer>
     </div>
 
   </div>
 
   <script>
-    const sections = ['home', 'sandpaper', 'metal-workflow', 'plastic-workflow', 'materials', 'equipment', 'defects', 'calc', 'remover'];
+    const sections = ['home', 'sandpaper', 'cleaning', 'metal-workflow', 'plastic-workflow', 'materials', 'equipment', 'defects', 'calc', 'comments', 'remover'];
     const titles = {
       home: 'Главная',
       sandpaper: 'Наждачная бумага',
+      cleaning: 'Обезжириватели',
       'metal-workflow': 'Окраска метала',
       'plastic-workflow': 'Окраска пластика',
       materials: 'Материалы',
       equipment: 'Оборудование',
       defects: 'Дефекты',
       calc: 'Калькулятор',
+      comments: 'Комментарии',
       remover: 'Смывватели'
     };
     let cur = 'home';
@@ -1945,6 +2348,183 @@
       document.documentElement.style.colorScheme = 'light';
       document.querySelector('.theme-toggle').textContent = '🌙 Светлая тема';
     }
+
+    // ========== COMMENTS SYSTEM ==========
+
+    // Load comments from JSON file or localStorage
+    async function loadComments() {
+      try {
+        // Сначала пытаемся загрузить из JSON файла
+        const response = await fetch('/comments.json');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.comments && Array.isArray(data.comments)) {
+            // Сохраняем в localStorage для кэширования
+            localStorage.setItem('automalyar-comments', JSON.stringify(data.comments));
+            return data.comments;
+          }
+        }
+      } catch (error) {
+        console.warn('Не удалось загрузить comments.json:', error);
+      }
+
+      // Резервный вариант: используем localStorage
+      try {
+        const stored = localStorage.getItem('automalyar-comments');
+        if (stored) {
+          return JSON.parse(stored);
+        }
+      } catch (error) {
+        console.warn('Ошибка при чтении localStorage:', error);
+      }
+
+      // Если ничего нет, возвращаем пустой массив
+      return [];
+    }
+
+    // Save comments to localStorage
+    function saveComments(comments) {
+      localStorage.setItem('automalyar-comments', JSON.stringify(comments));
+    }
+
+    // Display comments
+    async function displayComments() {
+      const comments = await loadComments();
+      const container = document.getElementById('comments-list');
+      
+      if (comments.length === 0) {
+        container.innerHTML = '<div style="text-align: center; color: var(--text2); padding: 2rem;"><p style="font-size: 14px;">Пока нет комментариев. Будь первым! 👇</p></div>';
+        return;
+      }
+
+      container.innerHTML = comments.map((comment, index) => `
+        <div class="comment">
+          <div class="comment-header">
+            <div>
+              <div class="comment-author">👤 ${escapeHtml(comment.name)}</div>
+              <span class="comment-type ${comment.type}">${getTypeLabel(comment.type)}</span>
+            </div>
+            <div class="comment-date">${formatDate(comment.date)}</div>
+          </div>
+          <div class="comment-text">${escapeHtml(comment.text).replace(/\n/g, '<br>')}</div>
+        </div>
+      `).join('');
+    }
+
+    // Format date
+    function formatDate(timestamp) {
+      const date = new Date(timestamp);
+      const days = Math.floor((Date.now() - date) / (1000 * 60 * 60 * 24));
+      
+      if (days === 0) return 'Сегодня';
+      if (days === 1) return 'Вчера';
+      if (days < 7) return `${days} дней назад`;
+      
+      return date.toLocaleDateString('ru-RU', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    }
+
+    // Get type label with emoji
+    function getTypeLabel(type) {
+      const labels = {
+        'comment': '💬 Комментарий',
+        'question': '❓ Вопрос',
+        'suggestion': '💡 Предложение',
+        'error': '⚠️ Ошибка'
+      };
+      return labels[type] || 'Комментарий';
+    }
+
+    // Escape HTML to prevent XSS
+    function escapeHtml(text) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return text.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    // Handle form submission
+    document.getElementById('comment-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('comment-name').value.trim();
+      const email = document.getElementById('comment-email').value.trim();
+      const type = document.getElementById('comment-type').value;
+      const text = document.getElementById('comment-text').value.trim();
+      const statusDiv = document.getElementById('comment-status');
+
+      // Validation
+      if (!name || !email || !text) {
+        showStatus('⚠️ Пожалуйста, заполни все поля', 'error', statusDiv);
+        return;
+      }
+
+      if (text.length < 10) {
+        showStatus('⚠️ Комментарий должен быть не менее 10 символов', 'error', statusDiv);
+        return;
+      }
+
+      if (text.length > 2000) {
+        showStatus('⚠️ Комментарий слишком длинный (макс 2000 символов)', 'error', statusDiv);
+        return;
+      }
+
+      // Show loading state
+      showStatus('📤 Отправляю...', 'loading', statusDiv);
+
+      try {
+        // Send email via Formspree
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('type', type);
+        formData.append('text', text);
+        formData.append('timestamp', new Date().toISOString());
+        formData.append('userAgent', navigator.userAgent);
+
+        const response = await fetch('https://formspree.io/f/xvgoqdly', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          showStatus('✅ Спасибо! Комментарий отправлен на проверку', 'success', statusDiv);
+          document.getElementById('comment-form').reset();
+        } else {
+          throw new Error('Ошибка отправки');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        showStatus('❌ Ошибка отправки. Попробуй позже', 'error', statusDiv);
+      }
+    });
+
+    // Show status message
+    function showStatus(message, type, element) {
+      element.textContent = message;
+      element.style.display = 'block';
+      element.style.backgroundColor = type === 'success' ? 'rgba(46, 204, 113, 0.1)' : type === 'error' ? 'rgba(231, 76, 60, 0.1)' : 'rgba(74, 158, 255, 0.1)';
+      element.style.color = type === 'success' ? 'var(--green)' : type === 'error' ? 'var(--red)' : 'var(--accent3)';
+      
+      if (type !== 'loading') {
+        setTimeout(() => {
+          element.style.display = 'none';
+        }, 5000);
+      }
+    }
+
+    // Load comments on page load
+    displayComments();
   </script>
 
 </body>
